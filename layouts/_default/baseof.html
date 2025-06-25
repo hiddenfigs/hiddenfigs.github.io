@@ -139,6 +139,8 @@
 
     {{ block "extra-footer" . }}{{ end }}
 
+    
+
 
     <button
       id="openPopupBtn"
@@ -147,34 +149,6 @@
       Open Popup
     </button>
 
-<<<<<<< HEAD
-    <button id="openPopupBtn" style="position: fixed; bottom: 20px; right: 20px; z-index: 999;">Open Popup</button>
-
-<!-- Scientist Popup -->
-<div id="popup" class="popup" style="display:none;">
-  <div class="popup-content">
-    <span class="close" id="closePopupBtn">&times;</span>
-    <h2>Welcome to our site! This is where you can add a new scientist entry yourself. Follow the instructions on the next page to complete the process.</h2>
-    <p>To add a new scientist, please fill out the form below with the required information. Once you have completed the form, click "Show My Input" to review your entries.</p>
-    <p> Feel free to leave any region blank. </p>
-    
-    <form id="scientistForm">
-      <div><label for="firstName">First Name:</label><input type="text" id="firstName" required /></div>
-      <div><label for="lastName">Last Name:</label><input type="text" id="lastName" required /></div>
-      <div><label for="researchArea">Research Area(s):</label><input type="text" id="researchArea" required /></div>
-      <div><label for="institution_of_phd">Institution of PhD:</label><input type="text" id="institution_of_phd" required /></div>
-      <div><label for="relevantCourses">Relevant Course(s):</label><input type="text" id="relevantCourses" required /></div>
-      <div><label for="relevantConcepts">Relevant Concept(s):</label><input type="text" id="relevantConcepts" required /></div>
-      <div><label for="images">Images (url):</label><input type="text" id="images" required /></div>
-      <div><label for="wikipedia">Wikipedia (url):</label><input type="text" id="wikipedia" required /></div>
-      <div><label for="general_bio">General Bio:</label><textarea id="general_bio" required></textarea></div>
-      <div><label for="key_contributions">Key Contributions:</label><textarea id="key_contributions" required></textarea></div>
-      <div><label for="citations">Citations:</label><textarea id="citations" required></textarea></div>
-      <div><label for="layout">Layout:</label><input type="text" id="layout" required /></div>
-      <div>
-        <button type="button" onclick="showInput()">Show My Input</button>
-        <button type="button" id="closeFormBtn">Close</button>
-=======
     <!-- Scientist Popup -->
     <div id="popup" class="popup" style="display:none;">
       <div class="popup-content">
@@ -234,7 +208,6 @@
             <button type="button" id="closeFormBtn">Close</button>
           </div>
         </form>
->>>>>>> d735d5167b91e16f06fa0f8f306b4cb4d77e9c8d
       </div>
     </div>
 
@@ -291,13 +264,8 @@
         const popup = document.getElementById("popup");
         const inputDisplay = document.getElementById("inputDisplay");
 
-<<<<<<< HEAD
-    // Show the popup immediately on page load
-    // popup.style.display = "block";
-=======
         // Show the popup immediately on page load
         popup.style.display = "block";
->>>>>>> d735d5167b91e16f06fa0f8f306b4cb4d77e9c8d
 
         document.getElementById("closePopupBtn").onclick = () =>
           (popup.style.display = "none");
@@ -359,33 +327,10 @@
         overflow: auto; /* <- Enable scrolling */
       }
 
-<<<<<<< HEAD
-<style>
- .popup {
-  display: none;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #1e1e1e;
-  color: #f0f0f0;
-  border: 1px solid #444;
-  padding: 20px;
-  z-index: 1000;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-  border-radius: 12px;
-  max-width: 650px;
-  width: 90%;
-  max-height: 90vh;
-  overflow: auto;
-  font-family: Arial, sans-serif;
-}
-=======
       .popup-content {
         position: relative;
         width: 100%;
       }
->>>>>>> d735d5167b91e16f06fa0f8f306b4cb4d77e9c8d
 
       .popup label {
         font-weight: bold;
@@ -394,83 +339,6 @@
         font-size: 14px;
       }
 
-<<<<<<< HEAD
-.popup label {
-  font-weight: bold;
-  display: block;
-  margin-top: 8px;
-  font-size: 14px;
-  color: #e0e0e0;
-}
-
-.popup input,
-.popup textarea {
-  width: 100%;
-  padding: 8px;
-  margin-top: 4px;
-  margin-bottom: 10px;
-  background-color: #2c2c2c;
-  border: 1px solid #555;
-  color: #fff;
-  border-radius: 4px;
-  font-size: 14px;
-}
-
-.popup button {
-  margin-top: 10px;
-  margin-right: 8px;
-  background: #0d6efd;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.3s;
-}
-
-.popup button:hover {
-  background: #0b5ed7;
-}
-
-.popup .close {
-  position: absolute;
-  top: 12px;
-  right: 14px;
-  font-size: 22px;
-  cursor: pointer;
-  color: #aaa;
-}
-
-.popup .close:hover {
-  color: #fff;
-}
-
-.popup pre {
-  background: #2b2b2b;
-  color: #e8e8e8;
-  padding: 12px;
-  border-radius: 6px;
-  max-height: 300px;
-  overflow: auto;
-  font-size: 13px;
-  border: 1px solid #444;
-}
-
-.popup a {
-  color: #4ea5f5;
-  text-decoration: underline;
-}
-
-.popup a:hover {
-  color: #80c8ff;
-
-}
-
-</style>
-
-  
-=======
       .popup input,
       .popup textarea {
         width: 100%;
@@ -509,6 +377,5 @@
         font-size: 13px;
       }
     </style>
->>>>>>> d735d5167b91e16f06fa0f8f306b4cb4d77e9c8d
   </body>
 </html>
