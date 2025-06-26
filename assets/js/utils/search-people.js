@@ -42,11 +42,11 @@ async function debouncedSearch(
 
 export default function searchPeople() {
   return {
-    filterType: 'scientist',
+    filterType: "scientist",
     filterResearchAreas: [],
     filterRelevantCourses: [],
     filterLevel: [],
-    query: '',
+    query: "",
     pagefind: null,
     error: null,
     isLoading: false,
@@ -57,7 +57,7 @@ export default function searchPeople() {
     async init() {
       let pagefind;
       try {
-        pagefind = await import('/pagefind/pagefind.js');
+        pagefind = await import("/pagefind/pagefind.js");
         await pagefind.options({ excerptLength: 10 });
         await pagefind.init();
       } catch (e) {
@@ -66,11 +66,11 @@ export default function searchPeople() {
       }
       this.pagefind = pagefind;
       for (let param of [
-        'query',
-        'filterType',
-        'filterResearchAreas',
-        'filterRelevantCourses',
-        'filterLevel',
+        "query",
+        "filterType",
+        "filterResearchAreas",
+        "filterRelevantCourses",
+        "filterLevel",
       ]) {
         this.$watch(param, () => this.search());
       }
@@ -119,7 +119,7 @@ export default function searchPeople() {
 
     // Clear the search results
     clear() {
-      this.query = '';
+      this.query = "";
       this.isLoading = false;
       this.results = null;
       this.error = null;
@@ -139,7 +139,7 @@ export default function searchPeople() {
         url: data.url,
         name: data.meta.title,
         excerpt: data.excerpt,
-        role: data.meta.role || '',
+        role: data.meta.role || "",
         researchAreas: data.filters.researchAreas || [],
         relevantCourses: data.filters.relevantCourses || [],
         level: data.filters.level || [],
@@ -162,28 +162,28 @@ export default function searchPeople() {
 
     // Generate the results text
     get resultsText() {
-      if (this.isLoading || !this.results) return '\u00a0';
-      if (!this.query && !this.hasFilters) return '\u00a0';
+      if (this.isLoading || !this.results) return "\u00a0";
+      if (!this.query && !this.hasFilters) return "\u00a0";
 
       let total = this.resultCount;
       let shown = this.results.length;
 
       if (total < 1) {
-        return 'No search results.';
+        return "No search results.";
       }
       if (total === 1) {
-        return 'Got one search result.';
+        return "Got one search result.";
       }
-      let more = total > shown ? `Showing first ${shown} results.` : '';
+      let more = total > shown ? `Showing first ${shown} results.` : "";
       return `Got ${total} search results. ${more}`;
     },
 
     // Helper function to format arrays
     andMore(arr) {
       if (arr.length > 3) {
-        return arr.slice(0, 2).join(', ') + ' and more';
+        return arr.slice(0, 2).join(", ") + " and more";
       }
-      return arr.join(', ');
+      return arr.join(", ");
     },
   };
 }

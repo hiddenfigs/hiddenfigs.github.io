@@ -4,7 +4,7 @@ export default function fetchJSON(url) {
       let err = new Error(
         `Unexpected response: ${url} ${rsp.status} ${rsp.statusText}`,
       );
-      err.name = 'Request error';
+      err.name = "Request error";
       throw err;
     }
     return rsp.json();

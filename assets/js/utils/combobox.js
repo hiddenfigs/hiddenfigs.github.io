@@ -1,11 +1,11 @@
 export default function comboBox() {
   return {
-    xmodel: '',
-    query: '',
+    xmodel: "",
+    query: "",
     options: [],
     init() {
       this.xmodel = this.$el.dataset.xmodel;
-      let opts = this.$refs.options.querySelectorAll('option');
+      let opts = this.$refs.options.querySelectorAll("option");
       this.options = Array.from(opts).map((opt, i) => ({
         id: i,
         name: opt.innerText,
@@ -20,7 +20,7 @@ export default function comboBox() {
       this[this.xmodel] = val;
     },
     get filteredOptions() {
-      return this.query === ''
+      return this.query === ""
         ? this.options
         : this.options.filter((framework) => {
             return framework.name

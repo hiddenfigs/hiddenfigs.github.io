@@ -141,17 +141,31 @@
 
 
     <div
-    id="addEntryBox"
-    style="cursor: pointer; font-weight: bold; text-align: center; padding: 20px; background-color: #f0f0f0; border-radius: 8px; width: 200px; margin: 40px auto;"
-  >
-    ➕ ADD AN ENTRY
-  </div>
+      id="addEntryBox"
+      style="cursor: pointer; font-weight: bold; text-align: center; padding: 20px; background-color: #f0f0f0; border-radius: 8px; width: 200px; margin: 40px auto;"
+    >
+      ➕ ADD AN ENTRY
+    </div>
 
     <!-- Scientist Popup -->
     <div id="popup" class="popup" style="display:none;">
       <div class="popup-content">
         <span class="close" id="closePopupBtn">&times;</span>
-        <h2>Welcome to our site!</h2>
+
+        <p>
+          Please fill in the fields below with as much detail as you can, things
+          like name, research areas, education, biography, and key
+          contributions.
+        </p>
+
+        <p>
+          After you finish this step, you'll be shown a preview of what you
+          entered, along with clear instructions for how to submit it as a new
+          file. No coding required, just copy, paste, and follow the simple
+          steps on the next page.
+        </p>
+
+        <p>Thank you for helping us spotlight the hidden figures!</p>
         <form id="scientistForm">
           <div>
             <label for="firstName">First Name:</label
@@ -264,7 +278,7 @@
 
         // Show the popup immediately on page load
         document.getElementById("addEntryBox").onclick = () =>
-        (popup.style.display = "block");
+          (popup.style.display = "block");
 
         document.getElementById("closePopupBtn").onclick = () =>
           (popup.style.display = "none");
@@ -307,105 +321,103 @@
       }
     </script>
 
-<style>
-  .popup {
-    display: none;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    border: 1px solid #ccc;
-    background-color: #ffffff;
-    padding: 20px;
-    z-index: 1000;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    max-width: 600px;
-    width: 90%;
-    max-height: 90vh;
-    overflow: auto;
-    color: #333;
-    font-family: sans-serif;
-  }
+    <style>
+      .popup {
+        display: none;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid #ccc;
+        background-color: #ffffff;
+        padding: 20px;
+        z-index: 1000;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        max-width: 600px;
+        width: 90%;
+        max-height: 90vh;
+        overflow: auto;
+        color: #333;
+        font-family: sans-serif;
+      }
 
-  .popup-content {
-    position: relative;
-    width: 100%;
-  }
+      .popup-content {
+        position: relative;
+        width: 100%;
+      }
 
-  .popup label {
-    font-weight: bold;
-    display: block;
-    margin-top: 10px;
-    font-size: 14px;
-    color: #333;
-  }
+      .popup label {
+        font-weight: bold;
+        display: block;
+        margin-top: 10px;
+        font-size: 14px;
+        color: #333;
+      }
 
-  .popup input,
-  .popup textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 6px;
-    margin-bottom: 12px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-    color: #333;
-  }
+      .popup input,
+      .popup textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 6px;
+        margin-bottom: 12px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+        color: #333;
+      }
 
-  .popup input:focus,
-  .popup textarea:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-  }
+      .popup input:focus,
+      .popup textarea:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+      }
 
-  .popup button {
-    margin-top: 10px;
-    margin-right: 8px;
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-  }
+      .popup button {
+        margin-top: 10px;
+        margin-right: 8px;
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+      }
 
-  .popup .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    cursor: pointer;
-    color: #333;
-  }
+      .popup .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+        cursor: pointer;
+        color: #333;
+      }
 
-  .popup pre {
-    background: #f1f1f1;
-    padding: 12px;
-    border-radius: 4px;
-    max-height: 250px;
-    overflow: auto;
-    font-size: 13px;
-    color: #111;
-  }
+      .popup pre {
+        background: #f1f1f1;
+        padding: 12px;
+        border-radius: 4px;
+        max-height: 250px;
+        overflow: auto;
+        font-size: 13px;
+        color: #111;
+      }
 
-  .popup a {
-  color: #007bff;
-  text-decoration: underline;
-  font-weight: 500;
-  cursor: pointer;
-  display: inline-block;
-  margin-top: 12px;
-}
+      .popup a {
+        color: #007bff;
+        text-decoration: underline;
+        font-weight: 500;
+        cursor: pointer;
+        display: inline-block;
+        margin-top: 12px;
+      }
 
-.popup a:hover {
-  color: #0056b3;
-}
-
-</style>
-
+      .popup a:hover {
+        color: #0056b3;
+      }
+    </style>
   </body>
 </html>

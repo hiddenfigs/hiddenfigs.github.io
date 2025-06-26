@@ -347,35 +347,35 @@
 
   <!-- CODE FOR CITATION, JavaScript for scroll and highlight-->
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const citationLinks = document.querySelectorAll('.citation-link');
+    document.addEventListener("DOMContentLoaded", function () {
+      const citationLinks = document.querySelectorAll(".citation-link");
 
       citationLinks.forEach((link) => {
-        link.addEventListener('click', function (event) {
+        link.addEventListener("click", function (event) {
           event.preventDefault();
 
           // Trigger the Contributions button click
           const contributionsButton = document.querySelector(
-            '#contributionsButton',
+            "#contributionsButton",
           );
           if (contributionsButton) {
             contributionsButton.click();
           }
 
-          const citeId = this.getAttribute('data-cite');
-          const citationElement = document.getElementById('cite-' + citeId);
+          const citeId = this.getAttribute("data-cite");
+          const citationElement = document.getElementById("cite-" + citeId);
 
-          citationElement.scrollIntoView({ behavior: 'smooth' });
+          citationElement.scrollIntoView({ behavior: "smooth" });
 
-          citationElement.classList.add('highlight');
+          citationElement.classList.add("highlight");
 
           // Start the fade-out effect after 2 seconds
           setTimeout(() => {
-            citationElement.classList.add('fade-out');
+            citationElement.classList.add("fade-out");
 
             // Remove highlight class after fade-out effect completes
             setTimeout(() => {
-              citationElement.classList.remove('highlight', 'fade-out');
+              citationElement.classList.remove("highlight", "fade-out");
             }, 500); // This should match the duration of the CSS transition
           }, 2000); // Highlight lasts for 2 seconds
         });
@@ -385,13 +385,13 @@
 
   <!-- CODE FOR CONVERTING ENCODING LEVEL TO NORMAL WORDING, JavaScript for scroll and highlight-->
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener("DOMContentLoaded", function () {
       // Map of levels to their descriptive text
       const levelDescriptions = {
-        K12: 'K-12',
-        UGLD: 'Undergraduate - Lower Division',
-        UGUD: 'Undergraduate - Upper Division',
-        G: 'Graduate',
+        K12: "K-12",
+        UGLD: "Undergraduate - Lower Division",
+        UGUD: "Undergraduate - Upper Division",
+        G: "Graduate",
       };
 
       // Function to update the innerHTML of elements with data-pagefind-filter="level"
@@ -403,7 +403,7 @@
 
         // Loop through each element and update its innerHTML
         levelElements.forEach((element) => {
-          const level = element.getAttribute('data-pagefind-filter-value');
+          const level = element.getAttribute("data-pagefind-filter-value");
           const description = levelDescriptions[level];
           if (description) {
             element.innerHTML = description;
@@ -416,12 +416,12 @@
     });
 
     // initial animation remove
-    document.addEventListener('DOMContentLoaded', function () {
-      const bioSection = document.querySelector('.enter6');
+    document.addEventListener("DOMContentLoaded", function () {
+      const bioSection = document.querySelector(".enter6");
 
       if (bioSection) {
-        bioSection.addEventListener('animationend', function () {
-          bioSection.classList.remove('enter6');
+        bioSection.addEventListener("animationend", function () {
+          bioSection.classList.remove("enter6");
         });
       }
     });
@@ -478,37 +478,37 @@
   <script src="https://unpkg.com/@popperjs/core@2"></script>
   <script src="https://unpkg.com/tippy.js@6"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      tippy('#college', {
-        content: 'Institution of Ph.D.',
-        placement: 'left',
+    document.addEventListener("DOMContentLoaded", function () {
+      tippy("#college", {
+        content: "Institution of Ph.D.",
+        placement: "left",
       });
-      tippy('#major', {
-        content: 'Field of Ph.D.',
-        placement: 'right',
+      tippy("#major", {
+        content: "Field of Ph.D.",
+        placement: "right",
       });
-      tippy('#years', {
-        content: 'Year of Ph.D. or highest degree',
-        placement: 'left',
+      tippy("#years", {
+        content: "Year of Ph.D. or highest degree",
+        placement: "left",
       });
-      tippy('#researchArea', {
-        content: 'Research Areas',
-        placement: 'right',
+      tippy("#researchArea", {
+        content: "Research Areas",
+        placement: "right",
       });
-      tippy('#relevantCourses', {
-        content: 'Relevant Courses',
-        placement: 'left',
+      tippy("#relevantCourses", {
+        content: "Relevant Courses",
+        placement: "left",
       });
-      tippy('#wiki', {
-        content: 'Wikipedia Link',
-        placement: 'right',
+      tippy("#wiki", {
+        content: "Wikipedia Link",
+        placement: "right",
       });
-      tippy('#levels', {
-        content: 'College Level Assessment',
-        placement: 'left',
+      tippy("#levels", {
+        content: "College Level Assessment",
+        placement: "left",
       });
-      tippy('#imageDownload', {
-        content: 'click the image to download',
+      tippy("#imageDownload", {
+        content: "click the image to download",
       });
     });
   </script>

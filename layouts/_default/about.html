@@ -68,14 +68,14 @@
 
   <!-- JavaScript to Remove Animation Class After Animation Ends -->
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const animatedElements = document.querySelectorAll('.enter-team-member');
+    document.addEventListener("DOMContentLoaded", function () {
+      const animatedElements = document.querySelectorAll(".enter-team-member");
 
       animatedElements.forEach((element) => {
-        element.addEventListener('animationend', () => {
+        element.addEventListener("animationend", () => {
           // Remove the animation class after the animation ends
           // the transform will be overwritten by the entering animation, so it get's removed and replaced with the hover animation
-          element.classList.remove('enter-team-member');
+          element.classList.remove("enter-team-member");
         });
       });
     });
