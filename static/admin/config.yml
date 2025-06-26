@@ -12,36 +12,36 @@ backend:
   branch: main
 
 yaml-definitions: &page-fields
-  - label: "URL path"
+  - label: 'URL path'
     hint: E.g. /about/
     name: url
     widget: string
     required: false
   - label: Title
     name: title
-    hint: "Title as it appears at top of page"
+    hint: 'Title as it appears at top of page'
     widget: string
   - label: Summary
     name: description
-    hint: "Shown in social share previews and search results"
+    hint: 'Shown in social share previews and search results'
     widget: string
     required: false
   - label: Body
     name: body
     widget: markdown
-  - label: "Override title tag"
+  - label: 'Override title tag'
     name: title-tag
     widget: string
-    hint: "Set title tag separately from page hed"
+    hint: 'Set title tag separately from page hed'
     required: false
   - label: Link to as
     name: linktitle
-    hint: "When linking to this page from another page, use this as the link title instead of hed"
+    hint: 'When linking to this page from another page, use this as the link title instead of hed'
     widget: string
     required: false
-  - label: "No index"
+  - label: 'No index'
     name: no-index
-    hint: "Hide page on Google etc."
+    hint: 'Hide page on Google etc.'
     widget: boolean
     required: false
   - label: URL path aliases
@@ -56,17 +56,17 @@ yaml-definitions: &page-fields
 
 collections:
   # Our data starts here
-  - label: "Scientists"
-    label_singular: "Scientist"
+  - label: 'Scientists'
+    label_singular: 'Scientist'
     name: scientist
     folder: content/scientists
-    filter: { field: "layout", value: "person" }
+    filter: { field: 'layout', value: 'person' }
     format: json
     extension: md
     create: True
-    slug: "{{title}}"
+    slug: '{{title}}'
     preview_path: /scientists/{{slug}}/
-    identity_field: "title"
+    identity_field: 'title'
     editor:
       preview: False
     fields:
@@ -75,12 +75,12 @@ collections:
         name: title
         widget: string
         required: true
-      - label: "Name"
-        name: "name"
-        widget: "string"
+      - label: 'Name'
+        name: 'name'
+        widget: 'string'
       - label: Link to as
         name: linktitle
-        hint: "When linking to this page from another page, use this as the link title instead of hed"
+        hint: 'When linking to this page from another page, use this as the link title instead of hed'
         widget: string
         required: false
       - label: Last name
@@ -88,80 +88,80 @@ collections:
         name: last
         widget: string
         required: true
-      - label: "Institution of Ph.D."
-        name: "institution_of_phd"
-        widget: "string"
-      - label: "Field of Ph.D."
-        name: "field_of_phd"
-        widget: "string"
-      - label: "Year of Ph.D."
-        name: "year_of_phd"
-        widget: "number"
-      - label: "Research areas"
-        name: "researchAreas"
-        widget: "list"
-      - label: "Relevant courses"
-        name: "relevantCourses"
-        widget: "list"
-      - label: "Relevant concepts"
-        name: "relevant_concepts"
-        widget: "list"
-      - label: "Wikipedia"
-        name: "wikipedia"
-        widget: "string"
-      - label: "Image"
-        name: "image"
-        widget: "string"
-      - label: "General bio"
-        name: "general_bio"
-        widget: "markdown"
-      - label: "Key contributions"
-        name: "key_contributions"
-        widget: "object"
+      - label: 'Institution of Ph.D.'
+        name: 'institution_of_phd'
+        widget: 'string'
+      - label: 'Field of Ph.D.'
+        name: 'field_of_phd'
+        widget: 'string'
+      - label: 'Year of Ph.D.'
+        name: 'year_of_phd'
+        widget: 'number'
+      - label: 'Research areas'
+        name: 'researchAreas'
+        widget: 'list'
+      - label: 'Relevant courses'
+        name: 'relevantCourses'
+        widget: 'list'
+      - label: 'Relevant concepts'
+        name: 'relevant_concepts'
+        widget: 'list'
+      - label: 'Wikipedia'
+        name: 'wikipedia'
+        widget: 'string'
+      - label: 'Image'
+        name: 'image'
+        widget: 'string'
+      - label: 'General bio'
+        name: 'general_bio'
+        widget: 'markdown'
+      - label: 'Key contributions'
+        name: 'key_contributions'
+        widget: 'object'
         fields:
-          - label: "Contribution title"
-            name: "title"
-            widget: "string"
-          - label: "Summary"
-            name: "summary"
-            widget: "text"
-      - label: "Citations"
-        name: "citations"
-        widget: "list"
+          - label: 'Contribution title'
+            name: 'title'
+            widget: 'string'
+          - label: 'Summary'
+            name: 'summary'
+            widget: 'text'
+      - label: 'Citations'
+        name: 'citations'
+        widget: 'list'
         field:
-          label: "Citation"
-          name: "citation"
-          widget: "string"
-      - label: "Level"
-        name: "level"
-        widget: "list"
+          label: 'Citation'
+          name: 'citation'
+          widget: 'string'
+      - label: 'Level'
+        name: 'level'
+        widget: 'list'
 
   - label: Landing pages
     name: landing
     editor:
       preview: false
     files:
-      - label: "Homepage"
+      - label: 'Homepage'
         name: homepage
         file: content/_index.md
         format: toml-frontmatter
         fields: *page-fields
-      - label: "Aboutpage"
+      - label: 'Aboutpage'
         name: about
         file: content/about/_index.md
         format: toml-frontmatter
         fields: *page-fields
-      - label: "People list page"
+      - label: 'People list page'
         name: people
         file: content/people/_index.md
         format: toml-frontmatter
         fields: *page-fields
-      - label: "research area page"
+      - label: 'research area page'
         name: researchAreas
         file: content/researchAreas/_index.md
         format: toml-frontmatter
         fields: *page-fields
-      - label: "relevant courses page"
+      - label: 'relevant courses page'
         name: relevantCourses
         file: content/relevantCourses/_index.md
         format: toml-frontmatter
@@ -172,8 +172,8 @@ collections:
     format: toml-frontmatter
     extension: md
     create: true
-    slug: "{{url}}"
-    preview_path: "/{{slug}}/"
+    slug: '{{url}}'
+    preview_path: '/{{slug}}/'
     editor:
       preview: false
     fields: *page-fields
@@ -186,13 +186,13 @@ collections:
         name: menus
         file: config/_default/menus.toml
         fields:
-          - label: "Site navbar items"
-            label_singular: "menu item"
+          - label: 'Site navbar items'
+            label_singular: 'menu item'
             name: navbar
-            hint: "Only shows on desktops"
+            hint: 'Only shows on desktops'
             widget: list
             fields: &menu
-              - label: "Display Name"
+              - label: 'Display Name'
                 name: name
                 widget: string
                 required: true
@@ -211,21 +211,21 @@ collections:
                 field:
                   { label: Image, name: image, widget: string, required: false }
                 required: false
-          - label: "Menu items"
-            label_singular: "menu item"
+          - label: 'Menu items'
+            label_singular: 'menu item'
             name: mobile
-            hint: "Only shows on mobile/tablet"
+            hint: 'Only shows on mobile/tablet'
             widget: list
             fields: *menu
-          - label: "Footer menu items"
-            label_singular: "menu item"
+          - label: 'Footer menu items'
+            label_singular: 'menu item'
             name: footer
-            hint: "Footer pages list, first column"
+            hint: 'Footer pages list, first column'
             widget: list
             fields: *menu
-          - label: "Social menu items"
-            label_singular: "menu item"
+          - label: 'Social menu items'
+            label_singular: 'menu item'
             name: social
-            hint: "Footer social links"
+            hint: 'Footer social links'
             widget: list
             fields: *menu

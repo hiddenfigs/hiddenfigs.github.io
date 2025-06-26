@@ -1,10 +1,10 @@
-import Alpine from "alpinejs";
-import collapse from "@alpinejs/collapse";
-import focus from "@alpinejs/focus";
-import ui from "@alpinejs/ui";
+import Alpine from 'alpinejs';
+import collapse from '@alpinejs/collapse';
+import focus from '@alpinejs/focus';
+import ui from '@alpinejs/ui';
 
-import searchPeople from "../utils/search-people.js";
-import comboBox from "../utils/combobox.js";
+import searchPeople from '../utils/search-people.js';
+import comboBox from '../utils/combobox.js';
 
 // Redirect admin emails to admin
 const routes =
@@ -12,7 +12,7 @@ const routes =
 
 if (window.location.hash.match(routes)) {
   window.location.replace(
-    window.location.origin + "/admin/" + window.location.hash,
+    window.location.origin + '/admin/' + window.location.hash,
   );
 }
 
@@ -31,12 +31,12 @@ Alpine.plugin(collapse);
 Alpine.plugin(focus);
 Alpine.plugin(ui);
 
-Alpine.data("searchPeople", searchPeople);
+Alpine.data('searchPeople', searchPeople);
 
-Alpine.data("combobox", comboBox);
+Alpine.data('combobox', comboBox);
 
-Alpine.magic("shuffle", () => (el) => shuffleChildren(el));
-Alpine.magic("rotate", () => (el, n) => rotateChildren(el, n));
+Alpine.magic('shuffle', () => (el) => shuffleChildren(el));
+Alpine.magic('rotate', () => (el, n) => rotateChildren(el, n));
 
 window.Alpine = Alpine;
 Alpine.start();

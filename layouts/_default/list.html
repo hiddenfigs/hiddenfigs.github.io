@@ -117,21 +117,21 @@
 
   <!-- JavaScript to Trigger Animation on Scroll with IntersectionObserver -->
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener('DOMContentLoaded', function () {
       const observerOptions = {
         root: null,
-        rootMargin: "0px",
+        rootMargin: '0px',
         threshold: 0.1,
       };
 
       const animatedElements = document.querySelectorAll(
-        ".person-list-item, .category-list-item",
+        '.person-list-item, .category-list-item',
       );
 
       function handleIntersection(entries, observer) {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("fadeInUp");
+            entry.target.classList.add('fadeInUp');
             observer.unobserve(entry.target); // Stop observing once animation has started
           }
         });

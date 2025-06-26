@@ -17,20 +17,20 @@
         },
 
         render() {
-          let value = this.props.value || "";
+          let value = this.props.value || '';
           let decoded = window.atob(value);
 
-          return h("input", {
+          return h('input', {
             id: this.props.forID,
             className: this.props.classNameWrapper,
-            type: "email",
+            type: 'email',
             value: decoded,
             onChange: this.handleChange,
           });
         },
       });
 
-      CMS.registerWidget("email", EmailControl);
+      CMS.registerWidget('email', EmailControl);
     </script>
   </body>
 </html>

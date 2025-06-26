@@ -1,5 +1,5 @@
-const purgecss = require("@fullhuman/postcss-purgecss")({
-  content: ["./hugo_stats.json"],
+const purgecss = require('@fullhuman/postcss-purgecss')({
+  content: ['./hugo_stats.json'],
   defaultExtractor: (content) => {
     let els = JSON.parse(content).htmlElements;
     return els.tags.concat(els.classes, els.ids);
@@ -7,7 +7,7 @@ const purgecss = require("@fullhuman/postcss-purgecss")({
   safelist: {
     standard: [
       // modal bg
-      "is-clipped",
+      'is-clipped',
     ],
     deep: [
       /textarea/,
@@ -20,8 +20,8 @@ const purgecss = require("@fullhuman/postcss-purgecss")({
 
 module.exports = {
   plugins: [
-    require("tailwindcss"),
-    require("autoprefixer"),
-    ...(process.env.HUGO_ENVIRONMENT !== "development" ? [purgecss] : []),
+    require('tailwindcss'),
+    require('autoprefixer'),
+    ...(process.env.HUGO_ENVIRONMENT !== 'development' ? [purgecss] : []),
   ],
 };

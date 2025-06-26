@@ -6,12 +6,12 @@ module.exports = {
     es6: true,
   },
   parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    parser: "babel-eslint",
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    parser: 'babel-eslint',
   },
-  extends: ["plugin:prettier/recommended", "eslint:recommended"],
+  extends: ['plugin:prettier/recommended', 'eslint:recommended'],
   rules: {
-    "no-console": "warn",
+    'no-console': 'warn',
   },
 };
