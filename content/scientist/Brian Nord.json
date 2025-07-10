@@ -2,15 +2,11 @@
   "title": "Brian Nord",
   "name": "Brian Nord",
   "linktitle": "Brian Nord",
-  "last" : "Nord",
+  "last": "Nord",
   "institution_of_phd": "University of Michigan",
   "field_of_phd": "Physics",
   "year_of_phd": 2010,
-  "researchAreas": [
-    "cosmology",
-    "astrophysics",
-    "artificial intelligence"
-  ],
+  "researchAreas": ["cosmology", "astrophysics", "artificial intelligence"],
   "images": ["/img/uploads/Brian_Nord.jpg"],
   "relevantCourses": [
     "Astronomy & Astrophysics",
@@ -33,7 +29,7 @@
   "citations": [
     "https://doi.org/10.1016/j.ascom.2019.100307",
     "https://arxiv.org/abs/2506.03037"
-  ], 
+  ],
   "layout": "person",
-  "level" : ["K12", "UGUD", "G"]
+  "level": ["K12", "UGUD", "G"]
 }

@@ -34,5 +34,5 @@ The site was not made with reuse in mind, but it hasn't been so hard. Just rip o
 2. Any pagefind related change/content change needs to run `yarn pagefind-dev` to load
 3. run `prettier docs package.json "{app,__{tests,mocks}__}/**/*.js" --write --single-quote --trailing-comma all` before you push
 4. run `yarn test` before push to the main branch to ensure proper deployment
-4. If you see expert, expertise, location, it is not related to this project
-5. The main folders: layouts, assets/js, contents and all the configs and yml(website building) files. 
+5. If you see expert, expertise, location, it is not related to this project
+6. The main folders: layouts, assets/js, contents and all the configs and yml(website building) files.

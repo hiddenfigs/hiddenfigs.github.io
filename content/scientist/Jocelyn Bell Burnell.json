@@ -30,5 +30,5 @@
     "https://www.allesoversterrenkunde.nl/!/!/!/actueel/artikelen/_detail/gli/50-years-pulsars/"
   ],
   "layout": "person",
-  "level" : ["K12", "UGLD"]
+  "level": ["K12", "UGLD"]
 }

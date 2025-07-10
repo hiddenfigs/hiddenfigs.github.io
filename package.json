@@ -6,14 +6,14 @@
   "scripts": {
     "format": "yarn run format:eslint; yarn run format:prettier",
     "format:eslint": "eslint --fix --ext .js --ignore-path .gitignore .",
-    "format:prettier": "prettier --ignore-path .gitignore --write '**/*.{html,css,js,yml}'",
+    "format:prettier": "prettier --ignore-path .gitignore --write '**/*.{html,css,js,yml,md,json}'",
     "build:prod": "hugo --cleanDestinationDir && yarn run pagefind",
     "build:stage": "hugo --cleanDestinationDir --environment staging --baseURL ${DEPLOY_PRIME_URL:-https://amplifycolorado.colabnews.co} && yarn run pagefind",
     "pagefind-dev": "hugo --cleanDestinationDir && pagefind --site public --output-path static/pagefind",
     "pagefind": "pagefind --site public",
     "test": "yarn run test:eslint && yarn run test:prettier",
     "test:eslint": "eslint --ext .js --ignore-path .gitignore .",
-    "test:prettier": "prettier --ignore-path .gitignore --check '**/*.{html,css,js,yml}'"
+    "test:prettier": "prettier --ignore-path .gitignore --check '**/*.{html,css,js,yml,md,json}'"
   },
   "dependencies": {
     "@alpinejs/collapse": "^3.14.1",
