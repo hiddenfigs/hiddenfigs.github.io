@@ -38,6 +38,12 @@ team_members:
   - name: "Katie Ameku"
     position: "Undergraduate Student, Coe College"
     image: "/img/uploads/Katie_Ameku.jpg"
+  - name: "Lavanya Arora"
+    position: "Undergraduate Student, University of California San Diego"
+    image: "/img/uploads/Lavanya_Arora.jpg"
+  - name: "Selina Zhang"
+    position: "Undergraduate Student, University of California San Diego"
+    image: "/img/uploads/Selina_Zhang.jpg"
 ---
 
 # About Us
