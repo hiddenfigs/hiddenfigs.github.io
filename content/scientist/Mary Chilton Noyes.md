@@ -3,7 +3,7 @@
   "name": "Mary Chilton Noyes",
   "linktitle": "Mary Chilton Noyes",
   "last": "Noyes",
-  "institution_of_phd": "Case Western Reserve University (Ph.D.)",
+  "institution_of_phd": "Case Western Reserve University",
   "field_of_phd": "Physics",
   "year_of_phd": "1895",
   "researchAreas": ["materials"],
