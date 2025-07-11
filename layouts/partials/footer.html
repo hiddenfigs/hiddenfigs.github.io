@@ -2,30 +2,39 @@
   <nav class="flex max-w-screen-xl flex-col gap-6 lg:flex-row">
     <!-- RCSA Logo Section -->
     <div class="flex items-center">
-      <a class="inline-flex flex-shrink-0 leading-none text-white" href="https://rescorp.org/">
+      <a
+        class="inline-flex flex-shrink-0 leading-none text-white"
+        href="https://rescorp.org/"
+      >
         <!-- Load and fingerprint the RCSA logo image -->
         {{ $logo := resources.Get "img/logos/rcsa_logo.png" }}
         {{ $logo = $logo | fingerprint }}
-        <img class="h-auto w-[200px]" width="476" height="146" src="{{ $logo.RelPermalink }}"
-          alt="Research Corporation for Science Advancement logo" loading="lazy" />
+        <img
+          class="h-auto w-[200px]"
+          width="476"
+          height="146"
+          src="{{ $logo.RelPermalink }}"
+          alt="Research Corporation for Science Advancement logo"
+          loading="lazy"
+        />
       </a>
     </div>
 
     <!-- RCSA Menu Section -->
     {{ $context := dict "menu" site.Menus.footer "name" "RCSA" }}
     {{ block "featured-footer" $context }}
-    <div class="flex-1 font-sans">
-      <h3 class="font-bold uppercase">{{ .name }}</h3>
-      <ul class="links-blue-lighter mt-2 space-y-2 uppercase leading-tight">
-        {{ range .menu }}
-        <li>
-          <a href="{{ .URL }}">
-            {{- .Name -}}
-          </a>
-        </li>
-        {{ end }}
-      </ul>
-    </div>
+      <div class="flex-1 font-sans">
+        <h3 class="font-bold uppercase">{{ .name }}</h3>
+        <ul class="links-blue-lighter mt-2 space-y-2 uppercase leading-tight">
+          {{ range .menu }}
+            <li>
+              <a href="{{ .URL }}">
+                {{- .Name -}}
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
     {{ end }}
 
 
@@ -36,11 +45,18 @@
       {{ $imgSmall := $logoAmp.Resize "30x" }}
       {{ $imgMedium := $logoAmp.Resize "600x" }}
       <a href="/">
-        <img class="h-auto w-[200px]" width="{{ $imgSmall.Width }}" height="{{ $imgSmall.Height }}"
-          src="{{ $imgSmall.RelPermalink }}" srcset="
+        <img
+          class="h-auto w-[200px]"
+          width="{{ $imgSmall.Width }}"
+          height="{{ $imgSmall.Height }}"
+          src="{{ $imgSmall.RelPermalink }}"
+          srcset="
             {{ $imgSmall.RelPermalink }} 30w,
             {{ $imgMedium.RelPermalink }} 60w
-          " alt="Hidden Figures logo" loading="lazy" />
+          "
+          alt="Hidden Figures logo"
+          loading="lazy"
+        />
       </a>
     </div>
 
@@ -53,9 +69,10 @@
     <div class="flex-grow">
       <p class="links-blue-lighter leading-tight">
         Hidden Figures in Physics and Astronomy is a<br />
-        Cottrell Scholars Collaborative (#CS-CSC-2023-005) funded by
-        the<br />
-        <a href="https://rescorp.org/">Research Corporation for Science Advancement</a>.
+        Cottrell Scholars Collaborative (#CS-CSC-2023-005) funded by the<br />
+        <a href="https://rescorp.org/"
+          >Research Corporation for Science Advancement</a
+        >.
         <br />
         Thanks to
         <a href="https://www.spotlightpa.org">Spotlight PA</a>
