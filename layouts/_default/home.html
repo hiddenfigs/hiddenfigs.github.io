@@ -54,9 +54,7 @@
   <section
     class="flex flex-col justify-around space-y-4 bg-g-4 p-8 shadow-inner sm:flex-row sm:space-x-4 sm:space-y-0"
   >
-    {{ $blkClass := `group relative block w-full border-8 border-gray bg-white p-2 text-center leading-tight shadow-md
-      duration-100 hover:border-black sm:w-64`
-    }}
+    {{ $blkClass := `group relative block w-full border-8 border-gray bg-white p-2 text-center leading-tight shadow-md duration-100 hover:border-black sm:w-64` }}
     {{ $svgWrapperClass := `text-blue group-hover:text-blue-darker` }}
     {{ $hedClass := `text-blue font-sans font-bold uppercase group-hover:text-blue-darker duration-100` }}
     {{ $dekClass := `my-1 mx-auto max-w-xs font-serif text-g-7` }}
@@ -85,7 +83,7 @@
       </div>
       <div class="{{ $hedClass }}">Add an entry</div>
       <div class="{{ $dekClass }}">
-        Or recommend someone and we’ll follow up!
+        Or recommend someone and we'll follow up!
       </div>
     </a>
 
@@ -107,7 +105,9 @@
         </svg>
       </div>
       <div class="{{ $hedClass }}">Update an entry</div>
-      <div class="{{ $dekClass }}">Has information changed? Let us know.</div>
+      <div class="{{ $dekClass }}">
+        Has some information changed? Let us know.
+      </div>
     </a>
   </section>
 
