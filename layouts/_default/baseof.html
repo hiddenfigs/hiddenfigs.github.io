@@ -1,23 +1,43 @@
 <!doctype html>
-<html lang="{{ .Param " language-code" | default site.LanguageCode }}">
+<html lang="{{ .Param "language-code" | default site.LanguageCode }}">
 
   <head itemscope itemtype="http://schema.org/WebSite">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>
       {{- if .Param "last" -}}
-      Hidden Figure &middot;
-      {{ .Title }}
+        Hidden Figure &middot;
+        {{ .Title }}
       {{- else -}}
-      {{ .Title }}
+        {{ .Title }}
       {{- end -}}
     </title>
 
     <!-- Preload fonts -->
-    <link rel="preload" as="font" href="/css/fonts/montserrat-v25/montserrat-v25-latin-700.woff2" crossorigin />
-    <link rel="preload" as="font" href="/css/fonts/roboto-slab-v32/roboto-slab-v32-latin-regular.woff2" crossorigin />
-    <link rel="preload" as="font" href="/css/fonts/roboto-slab-v32/roboto-slab-v32-latin-700.woff2" crossorigin />
-    <link rel="preload" as="font" href="/css/fonts/montserrat-v25/montserrat-v25-latin-regular.woff2" crossorigin />
+    <link
+      rel="preload"
+      as="font"
+      href="/css/fonts/montserrat-v25/montserrat-v25-latin-700.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      href="/css/fonts/roboto-slab-v32/roboto-slab-v32-latin-regular.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      href="/css/fonts/roboto-slab-v32/roboto-slab-v32-latin-700.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      href="/css/fonts/montserrat-v25/montserrat-v25-latin-regular.woff2"
+      crossorigin
+    />
     {{ if .IsHome }}
     <!-- Preload images for the homepage -->
     <link rel="preload" href="/img/background/bodyBackground.webp" as="image" />
