@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="{{ .Param "language-code" | default site.LanguageCode }}">
-
   <head itemscope itemtype="http://schema.org/WebSite">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -39,18 +38,30 @@
       crossorigin
     />
     {{ if .IsHome }}
-    <!-- Preload images for the homepage -->
-    <link rel="preload" href="/img/background/bodyBackground.webp" as="image" />
-    <link rel="preload" href="/img/background/titleBackground.webp" as="image" />
+      <!-- Preload images for the homepage -->
+      <link
+        rel="preload"
+        href="/img/background/bodyBackground.webp"
+        as="image"
+      />
+      <link
+        rel="preload"
+        href="/img/background/titleBackground.webp"
+        as="image"
+      />
     {{ else }}
-    <!-- Preload image for other pages -->
-    <link rel="preload" href="/img/background/personBackground.webp" as="image" />
+      <!-- Preload image for other pages -->
+      <link
+        rel="preload"
+        href="/img/background/personBackground.webp"
+        as="image"
+      />
     {{ end }}
 
     {{ $cssTW := resources.Get "css/main.css" }}
     {{ $css := $cssTW | resources.PostCSS (dict "inlineImports" true) }}
     {{ if not hugo.IsServer }}
-    {{ $css = $css | minify | fingerprint | resources.PostProcess }}
+      {{ $css = $css | minify | fingerprint | resources.PostProcess }}
     {{ end }}
     <link rel="stylesheet" href="{{ $css.RelPermalink }}" />
     {{ block "extra-head" . }}{{ end }}
@@ -61,7 +72,6 @@
         .no-js-show {
           display: block;
         }
-
         .no-js-hide {
           display: none;
         }
@@ -69,20 +79,24 @@
     </noscript>
     {{ $shouldMinify := not hugo.IsServer }}
     {{ $jsOpts := dict
-    "minify" $shouldMinify
-    "targetPath" "/js/main.js"
-    "target" "es2020"
-    "externals" (slice "/pagefind/*")
+      "minify" $shouldMinify
+      "targetPath" "/js/main.js"
+      "target" "es2020"
+      "externals" (slice "/pagefind/*")
     }}
     {{ $js := resources.Get "js/entrypoint/main.js" | js.Build $jsOpts }}
     {{ if $shouldMinify }}
-    {{ $js = $js | minify | fingerprint }}
+      {{ $js = $js | minify | fingerprint }}
     {{ end }}
     <link rel="modulepreload" href="{{ $js.RelPermalink }}" />
 
     <link rel="icon" href="/favicon.ico" type="image/png" sizes="any" />
     {{ $icon := site.Param "favicon" | resources.Get | fingerprint }}
-    <link rel="icon" type="{{ $icon.MediaType }}" href="{{ $icon.Permalink }}" />
+    <link
+      rel="icon"
+      type="{{ $icon.MediaType }}"
+      href="{{ $icon.Permalink }}"
+    />
     {{ $icon = site.Param "touch-icon" | resources.Get }}
     {{ range $size := slice "180x180" }}
     {{ $iconShrunk := $icon.Fit $size }}
