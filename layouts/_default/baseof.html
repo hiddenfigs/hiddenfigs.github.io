@@ -105,7 +105,8 @@
     <!-- Scientist Popup -->
     <div id="popup" class="popup" style="display:none;">
       <div class="popup-content">
-        <span class="close" id="closePopupBtn">&times;</span>
+        <span class="close" id="closePopupBtn"
+          onclick="document.getElementById('popup').style.display='none'">&times;</span>
 
         <p>
           Please fill in the fields below with as much detail as you can (missing information is OK).
@@ -176,7 +177,8 @@
             <label for="level">Level (K12, UGLD, UGUD, and/or G):</label><textarea id="level" required></textarea>
           </div>
           <button type="button" onclick="generateLink()">Generate URL</button>
-          <button type="button" id="closeFormBtn">Close</button>
+          <button type="button" id="closeFormBtn"
+            onclick="document.getElementById('popup').style.display='none'">Close</button>
       </div>
       </form>
     </div>
