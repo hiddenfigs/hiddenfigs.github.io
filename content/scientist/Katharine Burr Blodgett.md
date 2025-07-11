@@ -25,10 +25,10 @@
     "Advancements in surface chemistry": "Blodgett's research contributed to the understanding of molecular films and their properties, paving the way for advancements in materials science and surface engineering. Her work has influenced the development of new materials with tailored surface characteristics."
   },
   "citations": [
-    "https://www.invent.org/inductees/katharine-burr-blodgett", 
-    "https://www.pbs.org/video/katharine-burr-blodgett-she-inspires-marl6o/", 
+    "https://www.invent.org/inductees/katharine-burr-blodgett",
+    "https://www.pbs.org/video/katharine-burr-blodgett-she-inspires-marl6o/",
     "https://www.sciencehistory.org/stories/magazine/the-invisible-woman/"
   ],
   "layout": "person",
-  "level" : ["UGUD", "G"]
+  "level": ["UGUD", "G"]
 }

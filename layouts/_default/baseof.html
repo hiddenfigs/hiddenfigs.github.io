@@ -118,6 +118,8 @@
   </head>
   {{ $pageCat := printf "%s:%s" (.Section | default .Type) .Kind }}
   {{ if eq .Kind "home" }}{{ $pageCat = "home " }}{{ end }}
+
+
   <body
     data-ga-label="{{ $pageCat }}:featured"
     data-ga-category="featured"
@@ -140,32 +142,34 @@
     {{ block "extra-footer" . }}{{ end }}
 
 
-    <div
-      id="addEntryBox"
-      style="cursor: pointer; font-weight: bold; text-align: center; padding: 20px; background-color: #f0f0f0; border-radius: 8px; width: 200px; margin: 40px auto;"
-    >
-      ➕ ADD AN ENTRY
-    </div>
-
     <!-- Scientist Popup -->
     <div id="popup" class="popup" style="display:none;">
       <div class="popup-content">
-        <span class="close" id="closePopupBtn">&times;</span>
+        <span
+          class="close"
+          id="closePopupBtn"
+          onclick="document.getElementById('popup').style.display='none'"
+          >&times;</span
+        >
 
         <p>
-          Please fill in the fields below with as much detail as you can, things
-          like name, research areas, education, biography, and key
-          contributions.
+          Please fill in the fields below with as much detail as you can
+          (missing information is OK).
         </p>
 
+        <br />
         <p>
-          After you finish this step, you'll be shown a preview of what you
-          entered, along with clear instructions for how to submit it as a new
-          file. No coding required, just copy, paste, and follow the simple
-          steps on the next page.
+          After you finish this step, a link will be generated that you can
+          click to submit the pull request on GitHub. You will need to create or
+          log in to your GitHub account. No coding required, just copy and paste
+          the link, and follow the simple steps on the next page.
         </p>
 
-        <p>Thank you for helping us spotlight the hidden figures!</p>
+        <br />
+        <p>
+          Thank you for helping us spotlight hidden figures in physics and
+          astronomy!
+        </p>
         <form id="scientistForm">
           <div>
             <label for="firstName">First Name:</label
@@ -176,27 +180,41 @@
             ><input type="text" id="lastName" required />
           </div>
           <div>
-            <label for="researchArea">Research Area(s):</label
-            ><input type="text" id="researchArea" required />
-          </div>
-          <div>
             <label for="institution_of_phd">Institution of PhD:</label
             ><input type="text" id="institution_of_phd" required />
           </div>
           <div>
-            <label for="relevantCourses">Relevant Course(s):</label
+            <div>
+              <label for="field_of_phd">Field of PhD:</label
+              ><input type="text" id="field_of_phd" required />
+            </div>
+            <label for="year_of_phd">Year of PhD:</label
+            ><input type="text" id="year_of_phd" required />
+          </div>
+          <div>
+            <label for="researchArea">Research Area(s):</label
+            ><input type="text" id="researchArea" required />
+          </div>
+          <div>
+            <label for="relevantCourses"
+              >Relevant Course(s) (from
+              <a
+                href="https://docs.google.com/document/d/1fF4qyEi2m3vsm3Rq06g8kmsiurEXrZkj-EFDYru2mP4/edit?pli=1&tab=t.0"
+                >list</a
+              >: comma separated):</label
             ><input type="text" id="relevantCourses" required />
           </div>
           <div>
-            <label for="relevantConcepts">Relevant Concept(s):</label
+            <label for="relevantConcepts"
+              >Relevant Concept(s) (comma separated):</label
             ><input type="text" id="relevantConcepts" required />
           </div>
           <div>
-            <label for="images">Images (url):</label
+            <label for="images">Images (URL):</label
             ><input type="text" id="images" required />
           </div>
           <div>
-            <label for="wikipedia">Wikipedia (url):</label
+            <label for="wikipedia">Wikipedia (URL):</label
             ><input type="text" id="wikipedia" required />
           </div>
           <div>
@@ -204,20 +222,34 @@
             ><textarea id="general_bio" required></textarea>
           </div>
           <div>
-            <label for="key_contributions">Key Contributions:</label
+            <label for="key_contributions"
+              >Key Contributions (short title):</label
             ><textarea id="key_contributions" required></textarea>
           </div>
           <div>
-            <label for="citations">Citations:</label
+            <label for="key_contributions_long"
+              >Key Contributions (longer descriptions):</label
+            ><textarea id="key_contributions_long" required></textarea>
+          </div>
+
+          <div>
+            <label for="citations"
+              >Citations (DOIs or URLs, comma separated):</label
             ><textarea id="citations" required></textarea>
           </div>
           <div>
-            <label for="layout">Layout:</label
-            ><input type="text" id="layout" required />
+            <label for="level">Level (K12, UGLD, UGUD, and/or G):</label
+            ><textarea id="level" required></textarea>
           </div>
           <div>
-            <button type="button" onclick="showInput()">Show My Input</button>
-            <button type="button" id="closeFormBtn">Close</button>
+            <button type="button" onclick="generateLink()">Generate URL</button>
+            <button
+              type="button"
+              id="closeFormBtn"
+              onclick="document.getElementById('popup').style.display='none'"
+            >
+              Close
+            </button>
           </div>
         </form>
       </div>
@@ -231,43 +263,39 @@
           onclick="document.getElementById('inputDisplay').style.display='none'"
           >&times;</span
         >
-        <h2>Your Input</h2>
+        <h2>Your generated link</h2>
         <pre id="displayText"></pre>
+        <button onclick="copyToClipboard()">Copy URL</button>
         <p><strong>Instructions:</strong></p>
+        <br />
         <ol>
           <li>
-            <strong
-              >Instructions to update your input! Take a picture if you
-              can.</strong
-            >
-          </li>
-          <li><strong>Step 1:</strong> Copy the dictionary above.</li>
-          <li>
-            <strong>Step 2:</strong> Click the link below to create a 'add
-            file'.
-          </li>
-          <li><strong>Step 3:</strong> Click 'Create new file'.</li>
-          <li><strong>Step 4:</strong> Paste the dictionary into the file.</li>
-          <li>
-            <strong>Step 5:</strong> On "Name your file...", give your file a
-            name!
+            <strong>Step 1:</strong> Copy and paste the URL above into a new
+            browser window. You will need to create or be logged in to your
+            GitHub account.
           </li>
           <li>
-            <strong>Step 6:</strong> Click the green button 'Commit changes...'.
+            <strong>Step 2:</strong> If prompted, click the green button 'Fork
+            this repository'.
           </li>
-          <li><strong>Step 7:</strong> Propose Changes.</li>
           <li>
-            <strong>Step 8:</strong> Click on the top right green button,
-            "Create Pull Request", give an input, and submit your copied input!
+            <strong>Step 3:</strong> Click the green button on the top right
+            'Commit changes...'.
           </li>
-          <li><strong>Step 9:</strong> Bottom Right, Create Pull Request.</li>
+          <li>
+            <strong>Step 3:</strong> Click the green button 'Propose changes'.
+          </li>
+          <li>
+            <strong>Step 4:</strong> Click green button on the top right 'Create
+            pull request'.
+          </li>
+          <li>
+            <strong>Step 5:</strong> Finally, add a description (optional) and
+            click the green button on the bottom right 'Create pull request'.
+          </li>
         </ol>
-        <a
-          id="prLink"
-          href="https://github.com/hiddenfigs/hiddenfigs.github.io/tree/main/content"
-          target="_blank"
-          >Create New Pull Request</a
-        >
+        <br />
+        <p>We will review your pull request and get back to you!</p>
       </div>
     </div>
 
@@ -290,34 +318,68 @@
         };
       });
 
-      function showInput() {
+      function generateLink() {
         const getVal = (id) => document.getElementById(id)?.value || "";
 
+        // function to get key contribution titles and descriptions and make a dictionary
+        const getKeyContributions = () => {
+          const titles = getVal("key_contributions")
+            .split(",")
+            .map((s) => s.trim());
+          const descriptions = getVal("key_contributions_long")
+            .split(",")
+            .map((s) => s.trim());
+          const contributions = {};
+          titles.forEach((title, index) => {
+            contributions[title] = descriptions[index] || "";
+          });
+          return contributions;
+        };
         const inputData = {
-          "First Name": getVal("firstName"),
-          "Last Name": getVal("lastName"),
-          "Research Area": getVal("researchArea"),
-          "Institution of PhD": getVal("institution_of_phd"),
-          "Relevant Courses": getVal("relevantCourses")
+          title: getVal("firstName") + " " + getVal("lastName"),
+          name: getVal("firstName") + " " + getVal("lastName"),
+          linktitle: getVal("firstName") + " " + getVal("lastName"),
+          last: getVal("lastName"),
+          institution_of_phd: getVal("institution_of_phd"),
+          field_of_phd: getVal("field_of_phd"),
+          research_areas: getVal("researchArea"),
+          relevant_courses: getVal("relevantCourses")
             .split(",")
             .map((s) => s.trim()),
-          "Relevant Concepts": getVal("relevantConcepts")
+          relevant_concepts: getVal("relevantConcepts")
             .split(",")
             .map((s) => s.trim()),
-          "Images (url)": getVal("images"),
-          Wikipedia: getVal("wikipedia"),
-          "General Bio": getVal("general_bio"),
-          "Key Contributions": getVal("key_contributions"),
-          Citations: getVal("citations"),
-          Layout: getVal("layout"),
+          images: getVal("images")
+            .split(",")
+            .map((s) => s.trim()),
+          wikipedia: getVal("wikipedia"),
+          general_bio: getVal("general_bio"),
+          key_contributions: getKeyContributions(),
+          citations: getVal("citations"),
+          layout: "person",
+          level: getVal("level")
+            .split(",")
+            .map((s) => s.trim()),
         };
 
-        document.getElementById("displayText").innerText = JSON.stringify(
-          inputData,
-          null,
-          2,
-        );
+        const inputDataString = JSON.stringify(inputData, null, 2);
+
+        const prLink =
+          "https://github.com/hiddenfigs/hiddenfigs.github.io/new/main/content/scientist?filename=" +
+          encodeURIComponent(inputData.title + ".md") +
+          "&value=" +
+          encodeURIComponent(inputDataString);
+        document.getElementById("displayText").innerText = prLink;
         document.getElementById("inputDisplay").style.display = "block";
+      }
+      function copyToClipboard() {
+        const displayText = document.getElementById("displayText");
+        const textArea = document.createElement("textarea");
+        textArea.value = displayText.innerText;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
       }
     </script>
 

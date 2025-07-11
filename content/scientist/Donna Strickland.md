@@ -24,11 +24,11 @@
     "Development of high-intensity laser systems": "Strickland's innovations in high-intensity laser systems have had wide-ranging applications, from medical procedures like laser eye surgery to industrial processes such as laser micromachining. Her work has made lasers more powerful and versatile, enabling new technologies and techniques across various fields."
   },
   "citations": [
-    "https://uwaterloo.ca/physics-astronomy/profile/strickla", 
-    "https://www.bbc.com/news/science-environment-45655151", 
-    "https://www.nobelprize.org/prizes/physics/2018/strickland/biographical/", 
+    "https://uwaterloo.ca/physics-astronomy/profile/strickla",
+    "https://www.bbc.com/news/science-environment-45655151",
+    "https://www.nobelprize.org/prizes/physics/2018/strickland/biographical/",
     "https://www.optica.org/history/biographies/bios/donna-t-strickland/"
   ],
   "layout": "person",
-  "level" : ["K12", "G"]
+  "level": ["K12", "G"]
 }

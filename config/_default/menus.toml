@@ -32,12 +32,6 @@ url = "https://rescorp.org/"
 weight = 2
 
 [[mobile]]
-name = "Add your info"
-url = "https://forms.gle/ZRopiyBevpXu9D459"
-weight = 3
-post = "_blank"
-
-[[mobile]]
 name = "Contact Us"
 url = "mailto:hiddenfigs@googlegroups.com"
 weight = 4
@@ -56,12 +50,6 @@ weight = 2
 name = "About Us"
 url = "/about"
 weight = 2
-
-[[follow]]
-name = "Add your info"
-url = "https://forms.gle/ZRopiyBevpXu9D459"
-weight = 2
-post = "_blank"
 
 [[follow]]
 name = "Contact"

@@ -83,16 +83,12 @@
       </div>
       <div class="{{ $hedClass }}">Add an entry</div>
       <div class="{{ $dekClass }}">
-        Or recommend someone and we’ll follow up!
+        Or recommend someone and we'll follow up!
       </div>
     </a>
 
     <!-- Update Entry Button -->
-    {{ $emailSubject := `About my Hidden Figures database entry` }}
-    <a
-      href="mailto:hiddenfigs@googlegroups.com?subject={{ $emailSubject }}"
-      class="{{ $blkClass }}"
-    >
+    <a href="mailto:hiddenfigs@googlegroups.com" class="{{ $blkClass }}">
       <div class="{{ $svgWrapperClass }}">
         <svg
           class="inline h-20 w-20"
@@ -108,9 +104,9 @@
           />
         </svg>
       </div>
-      <div class="{{ $hedClass }}">Update your entry</div>
+      <div class="{{ $hedClass }}">Update an entry</div>
       <div class="{{ $dekClass }}">
-        Has your information changed? Let us know.
+        Has some information changed? Let us know.
       </div>
     </a>
   </section>

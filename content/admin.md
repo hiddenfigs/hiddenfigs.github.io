@@ -1,5 +1,4 @@
 {
-    "title": "admin",
-    "layout": "admin"
+"title": "admin",
+"layout": "admin"
 }
-

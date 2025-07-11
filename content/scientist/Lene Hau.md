@@ -32,5 +32,5 @@
     "https://doi.org/10.1103/PhysRevLett.104.133002"
   ],
   "layout": "person",
-  "level" : ["UGUD"]
+  "level": ["UGUD"]
 }
