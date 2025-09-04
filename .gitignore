@@ -110,3 +110,4 @@ bin/
 .hugo_build.lock
 static/pagefind
 .vs/
+.DS_Store
