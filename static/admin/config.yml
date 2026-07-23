@@ -7,6 +7,11 @@ logo_url: https://hiddenfigs.github.io/img/logos/hiddenfigs_logo.png
 
 show_preview_links: true
 
+# Required alongside backend.open_authoring: true - Open Authoring is
+# built on top of the editorial workflow (it's what drives the fork +
+# PR review flow for non-collaborators).
+publish_mode: editorial_workflow
+
 backend:
   name: github
   repo: hiddenfigs/hiddenfigs.github.io
