@@ -15,7 +15,7 @@ backend:
   # site. base_url must point at a Netlify site with a GitHub OAuth
   # provider configured under Site settings > Access control > OAuth.
   # See CONTRIBUTING.md for the one-time setup.
-  base_url: https://TODO-REPLACE-WITH-NETLIFY-SITE-URL.netlify.app
+  base_url: https://hiddenfigs.netlify.app
   auth_endpoint: auth
   # Lets any GitHub user propose an entry: Decap forks the repo on their
   # behalf, commits there, and opens a PR back to main. No collaborator
