@@ -4,17 +4,25 @@
 
 There are two ways to propose a scientist entry:
 
-1. **Issue form (recommended, no coding):** click "Add an entry" on the
-   homepage — or open a [new issue](https://github.com/hiddenfigs/hiddenfigs.github.io/issues/new?template=new-scientist.yml)
-   from the "Add a scientist entry" template — and fill it out. When you
-   submit, a bot builds the entry, validates it, and opens a pull request
-   from a branch in this repo. You only need a GitHub account to open the
-   issue; you grant no special permissions. If the entry doesn't validate,
-   the bot comments on your issue so you can edit and it retries
-   automatically. (See
-   [.github/ISSUE_TEMPLATE/new-scientist.yml](.github/ISSUE_TEMPLATE/new-scientist.yml),
+1. **Issue forms (recommended, no coding):** a bot turns a submitted form
+   into a pull request from a branch in this repo — building the entry,
+   validating it, and (if it doesn't validate) commenting on the issue so you
+   can edit and have it retried automatically. You only need a GitHub account
+   to open the issue; you grant no special permissions.
+   - **Add** a new entry: click "Add an entry" on the homepage, or open a
+     [new issue](https://github.com/hiddenfigs/hiddenfigs.github.io/issues/new?template=new-scientist.yml)
+     from the "Add a scientist entry" template.
+   - **Update** an existing entry: open the scientist's page (via "Update an
+     entry" on the homepage → pick a scientist) and click **"Suggest an
+     edit"**. That opens the "Update a scientist entry" form **prefilled with
+     the entry's current data** so you edit rather than retype; the bot then
+     updates that same entry file in the PR.
+
+   (See the [Add](.github/ISSUE_TEMPLATE/new-scientist.yml) and
+   [Update](.github/ISSUE_TEMPLATE/update-scientist.yml) forms,
    [scripts/issue-to-entry.js](scripts/issue-to-entry.js), and
-   [.github/workflows/new-scientist-issue.yml](.github/workflows/new-scientist-issue.yml).)
+   [.github/workflows/scientist-submission.yml](.github/workflows/scientist-submission.yml).)
+
 2. **CMS at `/admin/` (for maintainers / power contributors):** log in with
    GitHub and edit entries through a full form with live image uploads.
    Saving opens a pull request automatically. This requests the `public_repo`
@@ -46,12 +54,18 @@ setting: **Settings → Actions → General → Workflow permissions →** check
 **"Allow GitHub Actions to create and approve pull requests."** Without it,
 the bot can push the branch but the `gh pr create` step fails.
 
-The issue form also applies a `new-scientist-submission` label, but GitHub
-issue forms **silently drop labels that don't exist yet** — so create it
-once with
-`gh label create new-scientist-submission --description "Scientist entry submitted via the Add-an-entry issue form"`.
-The workflow also matches on the issue title prefix, so it still runs if the
-label is missing, but the label keeps these submissions easy to find.
+The forms also apply labels (`new-scientist-submission` /
+`update-scientist-submission`), but GitHub issue forms **silently drop labels
+that don't exist yet** — so create them once:
+
+```
+gh label create new-scientist-submission --description "New scientist entry submitted via the issue form"
+gh label create update-scientist-submission --description "Update to an existing scientist entry via the issue form"
+```
+
+The workflow also matches on the issue title prefix (`[New scientist]:` /
+`[Update scientist]:`), so it still runs if a label is missing, but the labels
+keep these submissions easy to find.
 
 ### Why `/admin/` asks for `public_repo`
 

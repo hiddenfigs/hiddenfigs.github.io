@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 "use strict";
 
-// Parses the body of a "new-scientist" GitHub issue form into a scientist
-// entry JSON file under content/scientist/. Reads the issue body from the
-// ISSUE_BODY environment variable so no untrusted text is interpolated into
-// a shell command. Writes the entry and reports the path via GITHUB_OUTPUT.
+// Parses the body of a scientist GitHub issue form (the "Add an entry" and
+// "Update an entry" forms) into an entry JSON file under content/scientist/.
+// Reads the issue body from the ISSUE_BODY environment variable so no
+// untrusted text is interpolated into a shell command. Writes the entry and
+// reports the path, title, and mode (create/update) via GITHUB_OUTPUT.
 //
 // The entry is built entirely from the parsed fields here — the submitter
-// never controls the output path (beyond the sanitized name) or any file
-// outside content/scientist/.
+// never controls the output path (beyond the sanitized name / entry id) or
+// any file outside content/scientist/.
 
 const fs = require("fs");
 const path = require("path");
@@ -17,9 +18,13 @@ const ROOT = path.join(__dirname, "..");
 const CONTENT_DIR = path.join(ROOT, "content", "scientist");
 
 // Issue-form field labels become "### <label>" headings in the issue body.
-// These must match the `label:` values in
-// .github/ISSUE_TEMPLATE/new-scientist.yml exactly.
+// These must match the `label:` values in the issue templates
+// (.github/ISSUE_TEMPLATE/new-scientist.yml and update-scientist.yml) exactly.
+// The "Add" form supplies First/Last name; the "Update" form supplies a
+// prefilled Full name and an Entry file id — both are handled below.
 const LABELS = {
+  entryFile: "Entry file",
+  fullName: "Full name",
   first: "First name",
   last: "Last name",
   institution: "Institution of Ph.D.",
@@ -61,11 +66,16 @@ const toLines = (value) =>
     .filter(Boolean);
 
 function buildEntry(fields) {
-  const first = get(fields, "first");
   const last = get(fields, "last");
-  const fullName = `${first} ${last}`.replace(/\s+/g, " ").trim();
-  if (!first || !last) {
-    throw new Error("First name and last name are both required.");
+  // The Update form prefills a single "Full name"; the Add form has separate
+  // "First name" / "Last name". Accept either.
+  const fullName = (
+    get(fields, "fullName") || `${get(fields, "first")} ${last}`
+  )
+    .replace(/\s+/g, " ")
+    .trim();
+  if (!fullName || !last) {
+    throw new Error("A full name and last name are both required.");
   }
 
   const titles = toLines(get(fields, "kcTitles"));
@@ -131,17 +141,26 @@ function setOutput(key, value) {
 function main() {
   const fields = parseIssueForm(process.env.ISSUE_BODY || "");
   const entry = buildEntry(fields);
-  const filename = safeFilename(entry.title);
+
+  // The Update form carries an "Entry file" id identifying which existing
+  // entry to overwrite, so the target stays fixed even if the display name
+  // is edited. The Add form has no such field, so fall back to the name.
+  const entryFile = get(fields, "entryFile");
+  const filename = safeFilename(entryFile || entry.title);
 
   const target = path.resolve(CONTENT_DIR, filename);
   if (path.dirname(target) !== path.resolve(CONTENT_DIR)) {
     throw new Error("Refusing to write outside content/scientist/.");
   }
 
+  const mode = fs.existsSync(target) ? "update" : "create";
   fs.writeFileSync(target, JSON.stringify(entry, null, 2) + "\n");
   setOutput("filepath", path.relative(ROOT, target));
   setOutput("title", entry.title);
-  console.log(`Wrote ${path.relative(ROOT, target)}`);
+  setOutput("mode", mode);
+  console.log(
+    `${mode === "update" ? "Updated" : "Wrote"} ${path.relative(ROOT, target)}`,
+  );
 }
 
 try {
