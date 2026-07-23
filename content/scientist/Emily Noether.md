@@ -23,5 +23,5 @@
     "https://www.newscientist.com/people/emmy-noether/"
   ],
   "layout": "person",
-  "level": ["UG-UD"]
+  "level": ["UGUD"]
 }

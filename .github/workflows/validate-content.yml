@@ -1,0 +1,38 @@
+name: Validate scientist entries
+
+on:
+  pull_request:
+    paths:
+      - "content/scientist/**"
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Determine changed scientist entries
+        if: github.event_name == 'pull_request'
+        id: changed
+        run: |
+          files=$(git diff --name-only --diff-filter=ACMR "origin/${{ github.event.pull_request.base.ref }}" "HEAD" -- content/scientist)
+          echo "files<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$files" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Validate changed entries
+        if: github.event_name == 'pull_request'
+        run: node scripts/validate-scientists.js "${{ steps.changed.outputs.files }}"
+
+      - name: Validate all entries
+        if: github.event_name == 'workflow_dispatch'
+        run: node scripts/validate-scientists.js --all
