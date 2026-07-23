@@ -20,6 +20,10 @@ To build the search index, run `yarn pagefind-dev`.
 
 To develop locally, run `yarn hugo serve` and open a web browser to http://localhost:1313/.
 
+## Contributing
+
+To propose a new scientist entry or edit an existing one, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Architecture
 
 Site search is powered by [PageFind](https://pagefind.app/). Before deploy, a search index is built at /public/pagefind/. During development, the search files are copied to /static/pagefind/, which is not synchronized to Git.
