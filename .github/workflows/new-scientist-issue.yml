@@ -1,0 +1,129 @@
+name: New scientist submission
+
+# When someone submits the "Add a scientist entry" issue form, build the
+# entry file, validate it, and open a pull request from a branch in this
+# repo. If it doesn't validate, comment on the issue instead so the
+# submitter can edit and have it retried automatically.
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  # Serialize re-runs for the same issue (edits) so branch/PR updates don't race.
+  group: new-scientist-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
+jobs:
+  create-pr:
+    # Only act on open issues created from the form (it auto-adds this label).
+    if: >-
+      github.event.issue.state == 'open' &&
+      contains(github.event.issue.labels.*.name, 'new-scientist-submission')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Untrusted issue text is passed via env (ISSUE_BODY), never
+      # interpolated into the shell, so it can't inject commands.
+      - name: Build entry file from issue
+        id: build
+        continue-on-error: true
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          set +e
+          out=$(node scripts/issue-to-entry.js 2>&1)
+          code=$?
+          echo "$out"
+          {
+            echo "log<<ISSUE_LOG_EOF"
+            echo "$out"
+            echo "ISSUE_LOG_EOF"
+          } >> "$GITHUB_OUTPUT"
+          exit $code
+
+      - name: Validate entry
+        id: validate
+        if: steps.build.outcome == 'success'
+        continue-on-error: true
+        run: |
+          set +e
+          out=$(node scripts/validate-scientists.js "$FILEPATH" 2>&1)
+          code=$?
+          echo "$out"
+          # Strip the GitHub annotation prefix for a readable issue comment.
+          clean=$(echo "$out" | sed -E 's/^::error file=[^:]*:://')
+          {
+            echo "log<<ISSUE_LOG_EOF"
+            echo "$clean"
+            echo "ISSUE_LOG_EOF"
+          } >> "$GITHUB_OUTPUT"
+          exit $code
+        env:
+          FILEPATH: ${{ steps.build.outputs.filepath }}
+
+      - name: Open or update pull request
+        id: pr
+        if: steps.build.outcome == 'success' && steps.validate.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          TITLE: ${{ steps.build.outputs.title }}
+          FILEPATH: ${{ steps.build.outputs.filepath }}
+        run: |
+          set -e
+          BRANCH="new-scientist/issue-${ISSUE_NUMBER}"
+          git config user.name "hidden-figures-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Rebuild the branch from main each run so it contains only this entry.
+          git checkout -b "$BRANCH"
+          git add "$FILEPATH"
+          git commit -m "Add scientist entry: ${TITLE} (from #${ISSUE_NUMBER})"
+          git push --force origin "$BRANCH"
+
+          existing=$(gh pr list --head "$BRANCH" --state open --json number --jq 'length')
+          if [ "$existing" -eq 0 ]; then
+            gh pr create --base main --head "$BRANCH" \
+              --title "Add scientist entry: ${TITLE}" \
+              --body "Automated from #${ISSUE_NUMBER}. Closes #${ISSUE_NUMBER} when merged."
+            echo "created=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "created=false" >> "$GITHUB_OUTPUT"
+          fi
+          url=$(gh pr view "$BRANCH" --json url --jq '.url')
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+
+      - name: Comment with the pull request link
+        if: steps.pr.outcome == 'success' && steps.pr.outputs.created == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          PR_URL: ${{ steps.pr.outputs.url }}
+        run: |
+          body=$(printf 'Thanks! Your entry has been opened as a pull request for review: %s\n\nA maintainer will take a look. If you spot a mistake, edit this issue and the pull request will update automatically.' "$PR_URL")
+          gh issue comment "$ISSUE_NUMBER" --body "$body"
+
+      - name: Comment on failure
+        if: steps.build.outcome == 'failure' || steps.validate.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          BUILD_LOG: ${{ steps.build.outputs.log }}
+          VALIDATE_LOG: ${{ steps.validate.outputs.log }}
+        run: |
+          details="$BUILD_LOG"
+          if [ -n "$VALIDATE_LOG" ]; then details="$VALIDATE_LOG"; fi
+          body=$(printf 'Thanks for your submission! A few things need fixing before this can become a pull request:\n\n```\n%s\n```\n\nEdit this issue to correct them and I will try again automatically.' "$details")
+          gh issue comment "$ISSUE_NUMBER" --body "$body"
