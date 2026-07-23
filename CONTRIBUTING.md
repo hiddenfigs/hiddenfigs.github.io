@@ -38,9 +38,11 @@ both the `hiddenfigs` GitHub org and that Netlify site.
    Install provider → GitHub → paste in the Client ID and Client Secret →
    Save.
 
-3. **Point the CMS at that Netlify site:** find the site's default URL
-   (Site settings → Domain management, looks like
-   `https://<site-name>.netlify.app`) and set it as `base_url` in
+3. **Tell the CMS which Netlify site to use:** the OAuth handshake is
+   brokered by Netlify's API at `https://api.netlify.com` (that's the
+   `base_url`), which looks up the provider by the Netlify site's domain.
+   Find that site's default URL (Site settings → Domain management, looks
+   like `https://<site-name>.netlify.app`) and set it as `site_domain` in
    [static/admin/config.yml](static/admin/config.yml):
 
    ```yaml
@@ -48,10 +50,15 @@ both the `hiddenfigs` GitHub org and that Netlify site.
      name: github
      repo: hiddenfigs/hiddenfigs.github.io
      branch: main
-     base_url: https://<site-name>.netlify.app
+     base_url: https://api.netlify.com
      auth_endpoint: auth
+     site_domain: <site-name>.netlify.app
      open_authoring: true
    ```
+
+   Note: `base_url` is Netlify's OAuth API, **not** your own
+   `*.netlify.app` subdomain — pointing it at the subdomain makes the
+   login pop-up 404 at `/auth`.
 
 4. **Verify:** visit `https://hiddenfigs.github.io/admin/`, click "Login
    with GitHub", authorize the app, and confirm you can open the Scientists
@@ -60,6 +67,10 @@ both the `hiddenfigs` GitHub org and that Netlify site.
    into your account and opens the PR from there — this works for any
    GitHub user, not just repo collaborators).
 
-If step 4 fails with an auth error, double check the callback URL in step 1
-is exactly `https://api.netlify.com/auth/done` and that the Client
-ID/Secret in step 2 match the OAuth App from step 1.
+You do **not** need to deploy the actual website to Netlify — GitHub Pages
+hosts the site. The Netlify site only has to exist as the OAuth broker.
+
+If step 4 fails: a 404 on the `/auth` pop-up means `base_url` isn't
+`https://api.netlify.com`; an auth/`site_id` error means `site_domain`
+doesn't match the Netlify site where the provider is installed (step 2),
+or the callback URL in step 1 isn't exactly `https://api.netlify.com/auth/done`.
