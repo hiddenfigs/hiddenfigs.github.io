@@ -1,15 +1,26 @@
 media_folder: static/img/uploads
 public_folder: /img/uploads
 
-site_url: https://amplifycolorado.colabnews.co
-display_url: https://amplifycolorado.colabnews.co
-logo_url: https://amplifycolorado.colabnews.co/img/logos/amplify-logo.png
+site_url: https://hiddenfigs.github.io
+display_url: https://hiddenfigs.github.io
+logo_url: https://hiddenfigs.github.io/img/logos/hiddenfigs_logo.png
 
 show_preview_links: true
 
 backend:
-  name: git-gateway
+  name: github
+  repo: hiddenfigs/hiddenfigs.github.io
   branch: main
+  # Netlify brokers the GitHub OAuth handshake for this non-Netlify-hosted
+  # site. base_url must point at a Netlify site with a GitHub OAuth
+  # provider configured under Site settings > Access control > OAuth.
+  # See CONTRIBUTING.md for the one-time setup.
+  base_url: https://TODO-REPLACE-WITH-NETLIFY-SITE-URL.netlify.app
+  auth_endpoint: auth
+  # Lets any GitHub user propose an entry: Decap forks the repo on their
+  # behalf, commits there, and opens a PR back to main. No collaborator
+  # access required.
+  open_authoring: true
 
 yaml-definitions: &page-fields
   - label: "URL path"
@@ -59,13 +70,13 @@ collections:
   - label: "Scientists"
     label_singular: "Scientist"
     name: scientist
-    folder: content/scientists
+    folder: content/scientist
     filter: { field: "layout", value: "person" }
     format: json
     extension: md
     create: True
     slug: "{{title}}"
-    preview_path: /scientists/{{slug}}/
+    preview_path: /scientist/{{slug}}/
     identity_field: "title"
     editor:
       preview: False
@@ -76,65 +87,85 @@ collections:
         widget: string
         required: true
       - label: "Name"
+        hint: "Shown on the person's page and card"
         name: "name"
         widget: "string"
+        required: true
       - label: Link to as
         name: linktitle
-        hint: "When linking to this page from another page, use this as the link title instead of hed"
+        hint: "When linking to this page from another page, use this as the link title instead of the full name"
         widget: string
         required: false
       - label: Last name
-        hint: E.g. "Schmidt" or "Smith-Rodriguez"
+        hint: E.g. "Schmidt" or "Smith-Rodriguez"; used to group the A-Z list
         name: last
         widget: string
         required: true
       - label: "Institution of Ph.D."
         name: "institution_of_phd"
         widget: "string"
+        required: false
       - label: "Field of Ph.D."
         name: "field_of_phd"
         widget: "string"
+        required: false
       - label: "Year of Ph.D."
+        hint: "E.g. 1962, or N/A if not applicable"
         name: "year_of_phd"
-        widget: "number"
+        widget: "string"
+        required: false
       - label: "Research areas"
+        hint: "One per line"
         name: "researchAreas"
         widget: "list"
+        required: true
       - label: "Relevant courses"
+        hint: "One per line"
         name: "relevantCourses"
         widget: "list"
+        required: true
       - label: "Relevant concepts"
+        hint: "One per line"
         name: "relevant_concepts"
         widget: "list"
+        required: false
       - label: "Wikipedia"
         name: "wikipedia"
         widget: "string"
-      - label: "Image"
-        name: "image"
-        widget: "string"
+        required: false
+      - label: "Images"
+        name: "images"
+        widget: "list"
+        required: false
+        field: { label: "Image", name: "image", widget: "image" }
       - label: "General bio"
         name: "general_bio"
         widget: "markdown"
+        required: true
       - label: "Key contributions"
         name: "key_contributions"
-        widget: "object"
+        widget: "list"
+        required: true
         fields:
-          - label: "Contribution title"
+          - label: "Title"
             name: "title"
             widget: "string"
           - label: "Summary"
             name: "summary"
             widget: "text"
       - label: "Citations"
+        hint: "DOIs or URLs, one per line"
         name: "citations"
         widget: "list"
-        field:
-          label: "Citation"
-          name: "citation"
-          widget: "string"
+        required: false
+        field: { label: "Citation", name: "citation", widget: "string" }
       - label: "Level"
+        hint: "Who this entry is written for"
         name: "level"
-        widget: "list"
+        widget: "select"
+        multiple: true
+        required: true
+        options: ["K12", "UGLD", "UGUD", "G"]
 
   - label: Landing pages
     name: landing
@@ -149,11 +180,6 @@ collections:
       - label: "Aboutpage"
         name: about
         file: content/about/_index.md
-        format: toml-frontmatter
-        fields: *page-fields
-      - label: "People list page"
-        name: people
-        file: content/people/_index.md
         format: toml-frontmatter
         fields: *page-fields
       - label: "research area page"

@@ -330,7 +330,7 @@
       function generateLink() {
         const getVal = (id) => document.getElementById(id)?.value || "";
 
-        // function to get key contribution titles and descriptions and make a dictionary
+        // function to get key contribution titles and descriptions and make an ordered list
         const getKeyContributions = () => {
           const titles = getVal("key_contributions")
             .split(",")
@@ -338,11 +338,10 @@
           const descriptions = getVal("key_contributions_long")
             .split(",")
             .map((s) => s.trim());
-          const contributions = {};
-          titles.forEach((title, index) => {
-            contributions[title] = descriptions[index] || "";
-          });
-          return contributions;
+          return titles.map((title, index) => ({
+            title,
+            summary: descriptions[index] || "",
+          }));
         };
         const yearRaw = getVal("year_of_phd");
         const yearParsed = parseInt(yearRaw, 10);

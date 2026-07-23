@@ -20,10 +20,16 @@
   "relevant_concepts": ["Radio Pulsars", "Pulsars"],
   "wikipedia": "https://en.wikipedia.org/wiki/Jocelyn_Bell_Burnell",
   "general_bio": "Jocelyn Bell Burnell is a British astrophysicist best known for her discovery of the first radio pulsars in 1967, a groundbreaking achievement in astronomy. Despite her pivotal role, the Nobel Prize for the discovery was controversially awarded to her male supervisor. Bell Burnell has held numerous academic and leadership positions and is a passionate advocate for diversity in science, using her influence to support underrepresented groups in physics.",
-  "key_contributions": {
-    "Discovery of Radio Pulsars": "While working on her Ph.D. at Cambridge, Bell Burnell identified the first radio pulsars, a type of neutron star that emits regular radio pulses. This discovery revolutionized our understanding of stellar evolution and neutron stars, although the Nobel Prize was awarded to her supervisor instead of her.",
-    "Advocacy for women and minorities in science": "Throughout her career, Bell Burnell has been a strong advocate for increasing diversity in the scientific community. She has used her platform to promote the inclusion of women, minorities, and refugees in physics, even donating her Special Breakthrough Prize money to fund scholarships for these underrepresented groups."
-  },
+  "key_contributions": [
+    {
+      "title": "Discovery of Radio Pulsars",
+      "summary": "While working on her Ph.D. at Cambridge, Bell Burnell identified the first radio pulsars, a type of neutron star that emits regular radio pulses. This discovery revolutionized our understanding of stellar evolution and neutron stars, although the Nobel Prize was awarded to her supervisor instead of her."
+    },
+    {
+      "title": "Advocacy for women and minorities in science",
+      "summary": "Throughout her career, Bell Burnell has been a strong advocate for increasing diversity in the scientific community. She has used her platform to promote the inclusion of women, minorities, and refugees in physics, even donating her Special Breakthrough Prize money to fund scholarships for these underrepresented groups."
+    }
+  ],
   "citations": [
     "https://www.nature.com/articles/d41586-018-06210-w",
     "https://doi.org/10.1093/ww/9780199540884.013.U7157",

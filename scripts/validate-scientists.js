@@ -68,16 +68,29 @@ function validateEntry(data) {
 
   if (data.key_contributions !== undefined) {
     const kc = data.key_contributions;
-    if (typeof kc !== "object" || kc === null || Array.isArray(kc)) {
+    if (!Array.isArray(kc)) {
       errors.push(
-        `"key_contributions" must be an object mapping title to summary`,
+        `"key_contributions" must be a list of { title, summary } objects`,
       );
     } else {
-      for (const [title, summary] of Object.entries(kc)) {
-        if (typeof summary !== "string") {
-          errors.push(`"key_contributions.${title}" must be a string`);
+      kc.forEach((entry, index) => {
+        if (
+          typeof entry !== "object" ||
+          entry === null ||
+          Array.isArray(entry)
+        ) {
+          errors.push(`"key_contributions[${index}]" must be an object`);
+          return;
         }
-      }
+        if (!isNonEmptyString(entry.title)) {
+          errors.push(
+            `"key_contributions[${index}].title" must be a non-empty string`,
+          );
+        }
+        if (typeof entry.summary !== "string") {
+          errors.push(`"key_contributions[${index}].summary" must be a string`);
+        }
+      });
     }
   }
 

@@ -284,7 +284,7 @@
         <section class="mt-2">
           <div>
             {{ $isOdd := false }}
-            {{ range $key, $value := .Params.key_contributions }}
+            {{ range .Params.key_contributions }}
               {{ $isOdd = not $isOdd }}
               <div
                 class="{{ cond $isOdd ` shadow-inner` `` }} p-2"
@@ -306,7 +306,7 @@
                     <span x-show="!isOpen" aria-hidden="true" class="mr-2"
                       >&plus;</span
                     >
-                    <span>{{ $key }}</span>
+                    <span>{{ .title }}</span>
                   </button>
                 </h3>
                 <div
@@ -316,7 +316,7 @@
                   class="links-blue-darker mt-2"
                 >
                   <p>
-                    {{ replaceRE "\\[CITE (\\d+)\\]" "<a href=\"#cite-$1\" class=\"citation-link\" data-cite=\"$1\">[$1]</a>" $value | safeHTML }}
+                    {{ replaceRE "\\[CITE (\\d+)\\]" "<a href=\"#cite-$1\" class=\"citation-link\" data-cite=\"$1\">[$1]</a>" .summary | safeHTML }}
                   </p>
                 </div>
               </div>
