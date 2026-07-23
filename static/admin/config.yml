@@ -16,12 +16,18 @@ backend:
   name: github
   repo: hiddenfigs/hiddenfigs.github.io
   branch: main
-  # Netlify brokers the GitHub OAuth handshake for this non-Netlify-hosted
-  # site. base_url must point at a Netlify site with a GitHub OAuth
-  # provider configured under Site settings > Access control > OAuth.
-  # See CONTRIBUTING.md for the one-time setup.
-  base_url: https://hiddenfigs.netlify.app
+  # This site is hosted on GitHub Pages, not Netlify. A Netlify site is
+  # used only to BROKER the GitHub OAuth handshake, through Netlify's
+  # OAuth API at api.netlify.com -- NOT through the Netlify site's own
+  # subdomain (pointing base_url at hiddenfigs.netlify.app is what caused
+  # the /auth 404). See CONTRIBUTING.md for the one-time setup.
+  base_url: https://api.netlify.com
   auth_endpoint: auth
+  # Netlify's broker matches the OAuth provider by site_id, which Decap
+  # otherwise sets to the current hostname (hiddenfigs.github.io) -- a
+  # domain Netlify doesn't know about. Force it to the Netlify site where
+  # the GitHub provider is installed so the lookup succeeds.
+  site_domain: hiddenfigs.netlify.app
   # Lets any GitHub user propose an entry: Decap forks the repo on their
   # behalf, commits there, and opens a PR back to main. No collaborator
   # access required.
