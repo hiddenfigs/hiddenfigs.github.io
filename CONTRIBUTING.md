@@ -33,6 +33,13 @@ setting: **Settings → Actions → General → Workflow permissions →** check
 **"Allow GitHub Actions to create and approve pull requests."** Without it,
 the bot can push the branch but the `gh pr create` step fails.
 
+The issue form also applies a `new-scientist-submission` label, but GitHub
+issue forms **silently drop labels that don't exist yet** — so create it
+once with
+`gh label create new-scientist-submission --description "Scientist entry submitted via the Add-an-entry issue form"`.
+The workflow also matches on the issue title prefix, so it still runs if the
+label is missing, but the label keeps these submissions easy to find.
+
 ### Why `/admin/` asks for `public_repo`
 
 Classic GitHub OAuth scopes are account-wide by category, not per-repo, and
