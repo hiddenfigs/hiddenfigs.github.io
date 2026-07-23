@@ -1,0 +1,117 @@
+name: Update a scientist entry
+description: Suggest a correction or addition to an existing entry. Reach this prefilled from a scientist's page via "Suggest an edit".
+title: "[Update scientist]: "
+labels: ["update-scientist-submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This form is normally opened **already filled in with the entry's
+        current information** from the "Suggest an edit" button on a
+        scientist's page. Change whatever needs fixing and submit — a bot
+        opens a pull request with your edits for maintainers to review.
+
+        If you landed here with an empty form, it's easier to start from the
+        scientist's page so the fields prefill for you.
+  - type: input
+    id: entry_file
+    attributes:
+      label: Entry file
+      description: >
+        Identifies which entry this updates — please leave it unchanged.
+    validations:
+      required: true
+  - type: input
+    id: full_name
+    attributes:
+      label: Full name
+    validations:
+      required: true
+  - type: input
+    id: last_name
+    attributes:
+      label: Last name
+      description: Used to group the A–Z list.
+    validations:
+      required: true
+  - type: input
+    id: institution_of_phd
+    attributes:
+      label: Institution of Ph.D.
+  - type: input
+    id: field_of_phd
+    attributes:
+      label: Field of Ph.D.
+  - type: input
+    id: year_of_phd
+    attributes:
+      label: Year of Ph.D.
+      description: "e.g. 1962, or N/A"
+  - type: textarea
+    id: research_areas
+    attributes:
+      label: Research areas
+      description: One per line.
+    validations:
+      required: true
+  - type: textarea
+    id: relevant_courses
+    attributes:
+      label: Relevant courses
+      description: One per line.
+    validations:
+      required: true
+  - type: textarea
+    id: relevant_concepts
+    attributes:
+      label: Relevant concepts
+      description: One per line. Optional.
+  - type: input
+    id: wikipedia
+    attributes:
+      label: Wikipedia URL
+  - type: textarea
+    id: images
+    attributes:
+      label: Image filename(s)
+      description: >
+        One per line. To add a new photo, first upload it to
+        static/img/uploads/ and then add its filename here.
+  - type: textarea
+    id: general_bio
+    attributes:
+      label: General bio
+    validations:
+      required: true
+  - type: textarea
+    id: key_contribution_titles
+    attributes:
+      label: Key contribution titles
+      description: One short title per line. Each must line up with a summary below.
+    validations:
+      required: true
+  - type: textarea
+    id: key_contribution_summaries
+    attributes:
+      label: Key contribution summaries
+      description: One summary per line, in the same order as the titles above.
+    validations:
+      required: true
+  - type: textarea
+    id: citations
+    attributes:
+      label: Citations
+      description: DOIs or URLs, one per line. Optional.
+  - type: dropdown
+    id: level
+    attributes:
+      label: Level
+      description: Who this entry is written for. Choose all that apply.
+      multiple: true
+      options:
+        - K12
+        - UGLD
+        - UGUD
+        - G
+    validations:
+      required: true
