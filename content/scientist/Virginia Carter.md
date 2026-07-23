@@ -23,5 +23,5 @@
     "https://www.hollywoodreporter.com/tv/tv-news/virginia-carter-dead-norman-lear-adviser-1236048009/"
   ],
   "layout": "person",
-  "level": ["UG-LD"]
+  "level": ["UGLD"]
 }

@@ -170,6 +170,17 @@
           Thank you for helping us spotlight hidden figures in physics and
           astronomy!
         </p>
+        <p>
+          <strong>Have a photo?</strong>
+          <a
+            href="https://github.com/hiddenfigs/hiddenfigs.github.io/upload/main/static/img/uploads"
+            target="_blank"
+            rel="noopener"
+            >Upload it here first</a
+          >
+          (opens GitHub's upload page in a new tab), then come back and enter
+          the filename you used in the "Image" field below.
+        </p>
         <form id="scientistForm">
           <div>
             <label for="firstName">First Name:</label
@@ -210,7 +221,9 @@
             ><input type="text" id="relevantConcepts" required />
           </div>
           <div>
-            <label for="images">Images (URL):</label
+            <label for="images"
+              >Image filename(s) you uploaded above (e.g. jane-doe.jpg; comma
+              separated if more than one):</label
             ><input type="text" id="images" required />
           </div>
           <div>
@@ -304,10 +317,6 @@
         const popup = document.getElementById("popup");
         const inputDisplay = document.getElementById("inputDisplay");
 
-        // Show the popup immediately on page load
-        document.getElementById("addEntryBox").onclick = () =>
-          (popup.style.display = "block");
-
         document.getElementById("closePopupBtn").onclick = () =>
           (popup.style.display = "none");
         document.getElementById("closeFormBtn").onclick = () =>
@@ -335,6 +344,9 @@
           });
           return contributions;
         };
+        const yearRaw = getVal("year_of_phd");
+        const yearParsed = parseInt(yearRaw, 10);
+
         const inputData = {
           title: getVal("firstName") + " " + getVal("lastName"),
           name: getVal("firstName") + " " + getVal("lastName"),
@@ -342,8 +354,11 @@
           last: getVal("lastName"),
           institution_of_phd: getVal("institution_of_phd"),
           field_of_phd: getVal("field_of_phd"),
-          research_areas: getVal("researchArea"),
-          relevant_courses: getVal("relevantCourses")
+          year_of_phd: Number.isNaN(yearParsed) ? yearRaw : yearParsed,
+          researchAreas: getVal("researchArea")
+            .split(",")
+            .map((s) => s.trim()),
+          relevantCourses: getVal("relevantCourses")
             .split(",")
             .map((s) => s.trim()),
           relevant_concepts: getVal("relevantConcepts")
@@ -351,11 +366,20 @@
             .map((s) => s.trim()),
           images: getVal("images")
             .split(",")
-            .map((s) => s.trim()),
+            .map((s) => s.trim())
+            .filter((s) => s)
+            .map((s) =>
+              s.startsWith("/") || s.startsWith("http")
+                ? s
+                : `/img/uploads/${s}`,
+            ),
           wikipedia: getVal("wikipedia"),
           general_bio: getVal("general_bio"),
           key_contributions: getKeyContributions(),
-          citations: getVal("citations"),
+          citations: getVal("citations")
+            .split(",")
+            .map((s) => s.trim())
+            .filter((s) => s),
           layout: "person",
           level: getVal("level")
             .split(",")

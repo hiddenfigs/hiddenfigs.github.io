@@ -12,13 +12,13 @@ All content copyright Hidden Figures in Physics and Astronomy. Code available un
 
 ## Installation
 
-Project requires Yarn and Hugo. See netlify.toml file for Node and Hugo versions.
+Project requires Yarn. `yarn install` also installs a pinned copy of Hugo (via the `hugo-extended` npm package) matching the version used in `.github/workflows/hugo.yml`, so you don't need Hugo installed globally.
 
 To setup, run `yarn`.
 
 To build the search index, run `yarn pagefind-dev`.
 
-To develop locally, run `hugo serve` and open a web browser to http://localhost:1313/.
+To develop locally, run `yarn hugo serve` and open a web browser to http://localhost:1313/.
 
 ## Architecture
 

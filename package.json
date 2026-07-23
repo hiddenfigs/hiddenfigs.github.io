@@ -4,6 +4,7 @@
   "repository": "https://github.com/spotlightpa/sourcesdb.git",
   "license": "MIT",
   "scripts": {
+    "hugo": "hugo",
     "format": "yarn run format:eslint; yarn run format:prettier",
     "format:eslint": "eslint --fix --ext .js --ignore-path .gitignore .",
     "format:prettier": "prettier --ignore-path .gitignore --write '**/*.{html,css,js,yml,json}'",
@@ -11,9 +12,10 @@
     "build:stage": "hugo --cleanDestinationDir --environment staging --baseURL ${DEPLOY_PRIME_URL:-https://amplifycolorado.colabnews.co} && yarn run pagefind",
     "pagefind-dev": "hugo --cleanDestinationDir && pagefind --site public --output-path static/pagefind",
     "pagefind": "pagefind --site public",
-    "test": "yarn run test:eslint && yarn run test:prettier",
+    "test": "yarn run test:eslint && yarn run test:prettier && yarn run validate:scientists",
     "test:eslint": "eslint --ext .js --ignore-path .gitignore .",
-    "test:prettier": "prettier --ignore-path .gitignore --check '**/*.{html,css,js,yml,json}'"
+    "test:prettier": "prettier --ignore-path .gitignore --check '**/*.{html,css,js,yml,json}'",
+    "validate:scientists": "node scripts/validate-scientists.js --all"
   },
   "dependencies": {
     "@alpinejs/collapse": "^3.14.1",
@@ -41,6 +43,7 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-standard": "^5.0.0",
+    "hugo-extended": "0.124.1",
     "prettier": "^3.6.1",
     "prettier-plugin-go-template": "^0.0.15",
     "prettier-plugin-tailwindcss": "^0.5.4"
