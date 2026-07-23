@@ -20,10 +20,23 @@ There are two ways to propose a scientist entry:
    Saving opens a pull request automatically. This requests the `public_repo`
    OAuth scope (see below).
 
-Either way, every pull request that touches `content/scientist/` is checked
-automatically by [.github/workflows/validate-content.yml](.github/workflows/validate-content.yml)
-(see [scripts/validate-scientists.js](scripts/validate-scientists.js) for
-what it checks) before a maintainer reviews it.
+Pull requests that touch `content/scientist/` are checked against the schema
+by [.github/workflows/validate-content.yml](.github/workflows/validate-content.yml)
+(see [scripts/validate-scientists.js](scripts/validate-scientists.js) for what
+it checks) before a maintainer reviews them.
+
+### A note on validation for bot-created PRs
+
+The `validate-content` check does **not** run automatically on PRs the
+issue-form bot opens, and that's expected: GitHub deliberately doesn't let a
+PR created with the built-in `GITHUB_TOKEN` trigger further workflows (an
+anti-recursion safeguard). It's safe to merge these anyway — the bot runs the
+**same** `validate-scientists.js` in its own workflow **before** it opens the
+PR, and only opens one if the entry passes (otherwise it comments the errors
+on the issue instead). So a bot PR existing already means the entry validated.
+If you want the visible check on such a PR, you can run `validate-content`
+manually from the Actions tab; on human-created PRs (the `/admin/` CMS or a
+manual edit) it runs automatically as usual.
 
 ### Enabling the issue-form bot (one-time)
 
