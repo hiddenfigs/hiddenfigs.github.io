@@ -7,7 +7,7 @@ name: New scientist submission
 
 on:
   issues:
-    types: [opened, edited]
+    types: [opened, edited, labeled]
 
 permissions:
   contents: write
@@ -21,10 +21,15 @@ concurrency:
 
 jobs:
   create-pr:
-    # Only act on open issues created from the form (it auto-adds this label).
+    # Act on open issues from the form. Match by the form's title prefix OR
+    # its label: the title works even if the "new-scientist-submission"
+    # label doesn't exist in the repo (GitHub issue forms silently drop
+    # labels that haven't been created), and the label lets a maintainer
+    # re-trigger a stray issue by (re-)applying it.
     if: >-
       github.event.issue.state == 'open' &&
-      contains(github.event.issue.labels.*.name, 'new-scientist-submission')
+      (startsWith(github.event.issue.title, '[New scientist]:') ||
+      contains(github.event.issue.labels.*.name, 'new-scientist-submission'))
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
