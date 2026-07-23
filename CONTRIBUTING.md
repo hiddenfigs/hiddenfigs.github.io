@@ -4,18 +4,43 @@
 
 There are two ways to propose a scientist entry:
 
-1. **No GitHub account needed for setup, but you'll still need one to submit:**
-   click "Add an entry" on the homepage, fill out the form, and follow the
-   generated link — it pre-fills a new file on GitHub for you to commit,
-   which opens a pull request.
-2. **Web form (`/admin/`):** log in with GitHub and edit entries through a
-   proper form. Saving opens a pull request automatically — you don't need
-   push access to this repo.
+1. **Issue form (recommended, no coding):** click "Add an entry" on the
+   homepage — or open a [new issue](https://github.com/hiddenfigs/hiddenfigs.github.io/issues/new?template=new-scientist.yml)
+   from the "Add a scientist entry" template — and fill it out. When you
+   submit, a bot builds the entry, validates it, and opens a pull request
+   from a branch in this repo. You only need a GitHub account to open the
+   issue; you grant no special permissions. If the entry doesn't validate,
+   the bot comments on your issue so you can edit and it retries
+   automatically. (See
+   [.github/ISSUE_TEMPLATE/new-scientist.yml](.github/ISSUE_TEMPLATE/new-scientist.yml),
+   [scripts/issue-to-entry.js](scripts/issue-to-entry.js), and
+   [.github/workflows/new-scientist-issue.yml](.github/workflows/new-scientist-issue.yml).)
+2. **CMS at `/admin/` (for maintainers / power contributors):** log in with
+   GitHub and edit entries through a full form with live image uploads.
+   Saving opens a pull request automatically. This requests the `public_repo`
+   OAuth scope (see below).
 
 Either way, every pull request that touches `content/scientist/` is checked
 automatically by [.github/workflows/validate-content.yml](.github/workflows/validate-content.yml)
 (see [scripts/validate-scientists.js](scripts/validate-scientists.js) for
 what it checks) before a maintainer reviews it.
+
+### Enabling the issue-form bot (one-time)
+
+The workflow uses the repo's built-in `GITHUB_TOKEN` — no secret to
+configure — but GitHub gates a token opening pull requests behind one
+setting: **Settings → Actions → General → Workflow permissions →** check
+**"Allow GitHub Actions to create and approve pull requests."** Without it,
+the bot can push the branch but the `gh pr create` step fails.
+
+### Why `/admin/` asks for `public_repo`
+
+Classic GitHub OAuth scopes are account-wide by category, not per-repo, and
+`public_repo` (public repos only, never private) is the narrowest scope that
+still lets the CMS fork the repo and open a PR on the contributor's behalf.
+It cannot be narrowed to a single repo without abandoning the browser-based
+CMS. If that scope is a concern, prefer the issue-form path above, which
+grants nothing.
 
 ## One-time setup: connecting the `/admin/` CMS to GitHub
 

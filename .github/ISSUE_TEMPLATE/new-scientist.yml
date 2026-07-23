@@ -1,0 +1,122 @@
+name: Add a scientist entry
+description: Suggest a scientist for the Hidden Figures database. Submitting opens a pull request automatically — no coding required.
+title: "[New scientist]: "
+labels: ["new-scientist-submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping spotlight a hidden figure in physics and astronomy!
+
+        Fill out what you can — missing optional fields are fine. When you submit,
+        a bot opens a pull request with your entry for maintainers to review. If
+        something isn't quite right, the bot will comment here so you can edit and
+        try again.
+  - type: input
+    id: first_name
+    attributes:
+      label: First name
+    validations:
+      required: true
+  - type: input
+    id: last_name
+    attributes:
+      label: Last name
+    validations:
+      required: true
+  - type: input
+    id: institution_of_phd
+    attributes:
+      label: Institution of Ph.D.
+      description: Where they earned their Ph.D. Leave blank if not applicable.
+  - type: input
+    id: field_of_phd
+    attributes:
+      label: Field of Ph.D.
+  - type: input
+    id: year_of_phd
+    attributes:
+      label: Year of Ph.D.
+      description: "e.g. 1962, or N/A"
+  - type: textarea
+    id: research_areas
+    attributes:
+      label: Research areas
+      description: One per line.
+      placeholder: |
+        cosmology
+        particle physics
+    validations:
+      required: true
+  - type: textarea
+    id: relevant_courses
+    attributes:
+      label: Relevant courses
+      description: One per line.
+      placeholder: |
+        Quantum Mechanics
+        Statistical Mechanics
+    validations:
+      required: true
+  - type: textarea
+    id: relevant_concepts
+    attributes:
+      label: Relevant concepts
+      description: One per line. Optional.
+  - type: input
+    id: wikipedia
+    attributes:
+      label: Wikipedia URL
+  - type: textarea
+    id: images
+    attributes:
+      label: Image filename(s)
+      description: >
+        Optional. First upload the photo to the static/img/uploads/ folder
+        (use GitHub's "Add file → Upload files" button on the repo), then put
+        just the filename here — e.g. jane-doe.jpg. One per line.
+  - type: textarea
+    id: general_bio
+    attributes:
+      label: General bio
+      description: A short paragraph about who they are and why they matter.
+    validations:
+      required: true
+  - type: textarea
+    id: key_contribution_titles
+    attributes:
+      label: Key contribution titles
+      description: One short title per line. Each must line up with a summary below.
+      placeholder: |
+        Orbital Trajectories
+        Mathematical Techniques
+    validations:
+      required: true
+  - type: textarea
+    id: key_contribution_summaries
+    attributes:
+      label: Key contribution summaries
+      description: One summary per line, in the same order as the titles above.
+      placeholder: |
+        Calculated the trajectories for Project Mercury and Apollo 11.
+        Developed new mathematical techniques for space travel.
+    validations:
+      required: true
+  - type: textarea
+    id: citations
+    attributes:
+      label: Citations
+      description: DOIs or URLs, one per line. Optional.
+  - type: dropdown
+    id: level
+    attributes:
+      label: Level
+      description: Who this entry is written for. Choose all that apply.
+      multiple: true
+      options:
+        - K12
+        - UGLD
+        - UGUD
+        - G
+    validations:
+      required: true
